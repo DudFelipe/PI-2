@@ -56,6 +56,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         sMenuCliente.add(opCadastrar);
 
         opAlterarExcluir.setText("Alterar / Excluir");
+        opAlterarExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opAlterarExcluirActionPerformed(evt);
+            }
+        });
         sMenuCliente.add(opAlterarExcluir);
 
         menuCadastros.add(sMenuCliente);
@@ -105,6 +110,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         JCadastroCliente c = new JCadastroCliente();
         c.show();
     }//GEN-LAST:event_opCadastrarActionPerformed
+
+    private void opAlterarExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opAlterarExcluirActionPerformed
+        JAlterarExcluirCliente a = new JAlterarExcluirCliente();
+        a.show();
+    }//GEN-LAST:event_opAlterarExcluirActionPerformed
 
     /**
      * @param args the command line arguments
