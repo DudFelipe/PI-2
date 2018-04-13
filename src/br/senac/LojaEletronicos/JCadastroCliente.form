@@ -34,8 +34,8 @@
                   <Component id="panelInfoPessoais" max="32767" attributes="0"/>
                   <Component id="panelContato" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="338" max="-2" attributes="0"/>
-                      <Component id="btnCadastrar" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnCadastrar" min="-2" pref="117" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
                       <Group type="102" attributes="0">
                           <Component id="lblSexo1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboSexo1" max="32767" attributes="0"/>
+                          <Component id="comboEstadoCivil" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
                       <Component id="lblRG" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtRG" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblSexo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboSexo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -186,7 +186,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCPF">
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboSexo1">
+        <Component class="javax.swing.JComboBox" name="comboEstadoCivil">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -337,6 +337,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
