@@ -6,6 +6,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     JCadastroCliente cadCli = null;
     JAlterarExcluirCliente altExcCli = null;
+    JVendas vendas = null;
+    JCadastroProduto cadProd = null;
+    JAlterarExcluirProduto altExcProd = null;
+    JRelatorioVendas relatorio = null;
     
     public JanelaPrincipal() {
         initComponents();
@@ -23,9 +27,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         sMenuProduto = new javax.swing.JMenu();
         opCadastrarProd = new javax.swing.JMenuItem();
         opAlterarExcluirProd = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,24 +60,45 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         sMenuProduto.setText("Produtos");
 
         opCadastrarProd.setText("Cadastrar");
+        opCadastrarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opCadastrarProdActionPerformed(evt);
+            }
+        });
         sMenuProduto.add(opCadastrarProd);
 
         opAlterarExcluirProd.setText("Alterar / Excluir");
+        opAlterarExcluirProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opAlterarExcluirProdActionPerformed(evt);
+            }
+        });
         sMenuProduto.add(opAlterarExcluirProd);
 
         menuCadastros.add(sMenuProduto);
 
         jMenuBar1.add(menuCadastros);
 
+        jMenu1.setText("Vendas");
+
+        jMenuItem1.setText("Vender produtos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
         jMenu2.setText("Relatórios");
 
-        jMenuItem4.setText("Cliente");
-        jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Produtos");
-        jMenu2.add(jMenuItem5);
-
         jMenuItem3.setText("Vendas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -116,6 +141,50 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         altExcCli.toFront();
     }//GEN-LAST:event_opAlterarExcluirActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(vendas == null || !vendas.isDisplayable()){
+            vendas = new JVendas();
+            vendas.pack();
+            vendas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            vendas.setLocationRelativeTo(null);
+            vendas.setVisible(true);
+        }
+        vendas.toFront();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void opCadastrarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastrarProdActionPerformed
+        if(cadProd == null || !cadProd.isDisplayable()){
+            cadProd = new JCadastroProduto();
+            cadProd.pack();
+            cadProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            cadProd.setLocationRelativeTo(null);
+            cadProd.setVisible(true);
+        }
+        cadProd.toFront();
+    }//GEN-LAST:event_opCadastrarProdActionPerformed
+
+    private void opAlterarExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opAlterarExcluirProdActionPerformed
+        if(altExcProd == null || !altExcProd.isDisplayable()){
+            altExcProd = new JAlterarExcluirProduto();
+            altExcProd.pack();
+            altExcProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            altExcProd.setLocationRelativeTo(null);
+            altExcProd.setVisible(true);
+        }
+        altExcProd.toFront();
+    }//GEN-LAST:event_opAlterarExcluirProdActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(relatorio == null || !relatorio.isDisplayable()){
+            relatorio = new JRelatorioVendas();
+            relatorio.pack();
+            relatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            relatorio.setLocationRelativeTo(null);
+            relatorio.setVisible(true);
+        }
+        relatorio.toFront();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -143,11 +212,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuItem opAlterarExcluir;
     private javax.swing.JMenuItem opAlterarExcluirProd;
