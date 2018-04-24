@@ -3,6 +3,7 @@ package br.senac.LojaEletronicos.Telas;
 
 import br.senac.LojaEletronicos.BLL.ClienteBLL;
 import br.senac.LojaEletronicos.Modelos.Cliente;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,10 +80,13 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblPreferencia.setText("Preferência de contato");
 
+        groupPreferencia.add(rbtTelefone);
         rbtTelefone.setText("Telefone Fixo");
 
+        groupPreferencia.add(rbtCelular);
         rbtCelular.setText("Celular");
 
+        groupPreferencia.add(rbtEmail);
         rbtEmail.setText("Email");
 
         javax.swing.GroupLayout panelContatoLayout = new javax.swing.GroupLayout(panelContato);
@@ -142,6 +146,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblNumero.setText("Número");
 
+        txtNumero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNumero.setText("0");
+
         lblCEP.setText("CEP");
 
         lblBairro.setText("Bairro");
@@ -150,7 +157,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblCidade.setText("Cidade");
 
-        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "São Paulo", "Rio de Janeiro" }));
+        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "São Paulo", "Rio de Janeiro" }));
 
         javax.swing.GroupLayout panelInfoEnderecoLayout = new javax.swing.GroupLayout(panelInfoEndereco);
         panelInfoEndereco.setLayout(panelInfoEnderecoLayout);
@@ -321,11 +328,17 @@ public class JCadastroCliente extends javax.swing.JFrame {
         Cliente c = new Cliente();
         
         c.setNome(txtNome.getText().toUpperCase());
-        c.setDataNascimento(txtNascimento.getText());
+        //c.setDataNascimento(txtNascimento.getText());
         c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
         c.setCPF(txtCPF.getText());
         c.setRG(txtRG.getText());
         c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase());
+        c.setEndereco(txtEndereco.getText().toUpperCase());
+        c.setNumero(Integer.parseInt(txtNumero.getText()));
+        c.setCEP(txtCEP.getText());
+        c.setBairro(txtBairro.getText().toUpperCase());
+        c.setComplemento(txtComplemento.getText().toUpperCase());
+        c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase());
         c.setTelefoneFixo(txtTelefone.getText());
         c.setCelular(txtCelular.getText());
         c.setEmail(txtEmail.getText().toUpperCase());
@@ -344,10 +357,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
             }
         }
         
-        ClienteBLL bll = new ClienteBLL();
-        String msg = bll.validaCliente(c);
+        List<String> msgs = ClienteBLL.validaCliente(c);
         
-        if(msg == null){
+        if(msgs.isEmpty()){
             int confirma;
             confirma = JOptionPane.showConfirmDialog(null, "Deseja realmente cadastrar esse cliente?", "Confirma cadastro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             
@@ -356,7 +368,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, msg, "Erro!", 0);
+            JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

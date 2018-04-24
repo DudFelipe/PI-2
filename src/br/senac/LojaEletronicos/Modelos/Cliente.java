@@ -5,11 +5,17 @@ import java.util.Date;
 
 public class Cliente {
     private String nome;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String sexo;
     private String CPF;
     private String RG;
     private String estadoCivil;
+    private String endereco;
+    private int numero;
+    private String CEP;
+    private String bairro;
+    private String complemento;
+    private String cidade;
     private String telefoneFixo;
     private String celular;
     private String email;
@@ -17,11 +23,17 @@ public class Cliente {
 
     public Cliente(){
         nome = "";
-        dataNascimento = "";
+        dataNascimento = new Date();
         sexo = "";
         CPF = "";
         RG = "";
         estadoCivil = "";
+        endereco = "";
+        numero = 0;
+        CEP = "";
+        bairro = "";
+        complemento = "";
+        cidade = "";
         telefoneFixo = "";
         celular = "";
         email = "";
@@ -35,6 +47,12 @@ public class Cliente {
         System.out.println("CPF: " + CPF);
         System.out.println("RG: " + RG);
         System.out.println("Estado Civil: " + estadoCivil);
+        System.out.println("Endereço: " + endereco);
+        System.out.println("Número: " + numero);
+        System.out.println("CEP: " + CEP);
+        System.out.println("Bairro: " + bairro);
+        System.out.println("Complemento: " + complemento);
+        System.out.println("Cidade: " + cidade);
         System.out.println("Telefone fixo: " + telefoneFixo);
         System.out.println("Celular: " + celular);
         System.out.println("Email: " + email);
@@ -49,11 +67,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -89,6 +107,54 @@ public class Cliente {
         this.estadoCivil = estadoCivil;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getCEP() {
+        return CEP;
+    }
+
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+    
     public String getTelefoneFixo() {
         return telefoneFixo;
     }
