@@ -3,6 +3,9 @@ package br.senac.LojaEletronicos.Telas;
 
 import br.senac.LojaEletronicos.BLL.ClienteBLL;
 import br.senac.LojaEletronicos.Modelos.Cliente;
+import br.senac.LojaEletronicos.Servico.ServicoCliente;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,13 +54,13 @@ public class JCadastroCliente extends javax.swing.JFrame {
         lblSexo = new javax.swing.JLabel();
         txtRG = new javax.swing.JTextField();
         lblRG = new javax.swing.JLabel();
-        txtNascimento = new javax.swing.JTextField();
         lblNascimento = new javax.swing.JLabel();
         comboSexo = new javax.swing.JComboBox<>();
         lblCPF = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
         comboEstadoCivil = new javax.swing.JComboBox<>();
         lblSexo1 = new javax.swing.JLabel();
+        txtFmtNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -79,10 +82,13 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblPreferencia.setText("Preferência de contato");
 
+        groupPreferencia.add(rbtTelefone);
         rbtTelefone.setText("Telefone Fixo");
 
+        groupPreferencia.add(rbtCelular);
         rbtCelular.setText("Celular");
 
+        groupPreferencia.add(rbtEmail);
         rbtEmail.setText("Email");
 
         javax.swing.GroupLayout panelContatoLayout = new javax.swing.GroupLayout(panelContato);
@@ -142,6 +148,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblNumero.setText("Número");
 
+        txtNumero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNumero.setText("0");
+
         lblCEP.setText("CEP");
 
         lblBairro.setText("Bairro");
@@ -150,7 +159,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblCidade.setText("Cidade");
 
-        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "São Paulo", "Rio de Janeiro" }));
+        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "São Paulo", "Rio de Janeiro" }));
 
         javax.swing.GroupLayout panelInfoEnderecoLayout = new javax.swing.GroupLayout(panelInfoEndereco);
         panelInfoEndereco.setLayout(panelInfoEnderecoLayout);
@@ -249,8 +258,8 @@ public class JCadastroCliente extends javax.swing.JFrame {
                 .addGroup(panelInfoPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addComponent(lblNascimento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNascimento))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFmtNascimento))
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addComponent(lblCPF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -269,7 +278,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNascimento)
-                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSexo)
@@ -321,11 +330,20 @@ public class JCadastroCliente extends javax.swing.JFrame {
         Cliente c = new Cliente();
         
         c.setNome(txtNome.getText().toUpperCase());
-        c.setDataNascimento(txtNascimento.getText());
+        
+        /*Date dataConvertida = (Date) txtFmtNascimento.getValue();
+        c.setDataNascimento(dataConvertida);*/
+        
         c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
         c.setCPF(txtCPF.getText());
         c.setRG(txtRG.getText());
         c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase());
+        c.setEndereco(txtEndereco.getText().toUpperCase());
+        c.setNumero(Integer.parseInt(txtNumero.getText()));
+        c.setCEP(txtCEP.getText());
+        c.setBairro(txtBairro.getText().toUpperCase());
+        c.setComplemento(txtComplemento.getText().toUpperCase());
+        c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase());
         c.setTelefoneFixo(txtTelefone.getText());
         c.setCelular(txtCelular.getText());
         c.setEmail(txtEmail.getText().toUpperCase());
@@ -344,19 +362,16 @@ public class JCadastroCliente extends javax.swing.JFrame {
             }
         }
         
-        ClienteBLL bll = new ClienteBLL();
-        String msg = bll.validaCliente(c);
+        List<String> msgs = ServicoCliente.cadastrarCliente(c);
         
-        if(msg == null){
-            int confirma;
-            confirma = JOptionPane.showConfirmDialog(null, "Deseja realmente cadastrar esse cliente?", "Confirma cadastro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            
-            if(confirma == JOptionPane.YES_OPTION){
-                c.mostraCliente();
-            }
+        if(msgs.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane,
+                        "Cliente inserido com sucesso",
+                        "Cadastro efetuado",
+                        JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null, msg, "Erro!", 0);
+            JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -427,7 +442,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtNascimento;
+    private javax.swing.JFormattedTextField txtFmtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRG;

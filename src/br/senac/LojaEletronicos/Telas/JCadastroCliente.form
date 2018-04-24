@@ -169,16 +169,25 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbtTelefone">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupPreferencia"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Telefone Fixo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbtCelular">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupPreferencia"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Celular"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbtEmail">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupPreferencia"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
         </Component>
@@ -274,6 +283,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumero">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCEP">
         </Component>
@@ -304,9 +317,10 @@
         <Component class="javax.swing.JComboBox" name="comboCidade">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="S&#xe3;o Paulo"/>
-                <StringItem index="1" value="Rio de Janeiro"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Selecione..."/>
+                <StringItem index="1" value="S&#xe3;o Paulo"/>
+                <StringItem index="2" value="Rio de Janeiro"/>
               </StringArray>
             </Property>
           </Properties>
@@ -350,8 +364,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblNascimento" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNascimento" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="txtFmtNascimento" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
@@ -376,7 +390,7 @@
                       <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFmtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -416,8 +430,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="RG"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNascimento">
         </Component>
         <Component class="javax.swing.JLabel" name="lblNascimento">
           <Properties>
@@ -464,6 +476,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Estado Civil"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtFmtNascimento">
         </Component>
       </SubComponents>
     </Container>
