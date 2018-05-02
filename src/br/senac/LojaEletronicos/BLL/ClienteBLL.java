@@ -14,10 +14,10 @@ public class ClienteBLL {
             //return "O campo NOME é um campo obrigatório!";
             erros.add("O campo NOME é um campo obrigatório!");
         }
-        /*if(c.getDataNascimento() == null){
+        if(c.getDataNascimento() == null){
             //return "O campo DATA DE NASCIMENTO é um campo obrigatório!";
             erros.add("\nO campo DATA DE NASCIMENTO é um campo obrigatório!\n");
-        }*/
+        }
         
         if(c.getSexo().equals("SELECIONE...")){
             //return "O campo SEXO é um campo obrigatório!";

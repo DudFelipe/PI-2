@@ -236,6 +236,8 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblSexo1.setText("Estado Civil");
 
+        txtFmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout panelInfoPessoaisLayout = new javax.swing.GroupLayout(panelInfoPessoais);
         panelInfoPessoais.setLayout(panelInfoPessoaisLayout);
         panelInfoPessoaisLayout.setHorizontalGroup(
@@ -331,8 +333,8 @@ public class JCadastroCliente extends javax.swing.JFrame {
         
         c.setNome(txtNome.getText().toUpperCase());
         
-        /*Date dataConvertida = (Date) txtFmtNascimento.getValue();
-        c.setDataNascimento(dataConvertida);*/
+        Date dataConvertida = (Date) txtFmtNascimento.getValue();
+        c.setDataNascimento(dataConvertida);
 
         c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
         c.setCPF(txtCPF.getText());
