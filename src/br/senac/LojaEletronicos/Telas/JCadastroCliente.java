@@ -333,7 +333,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
         
         /*Date dataConvertida = (Date) txtFmtNascimento.getValue();
         c.setDataNascimento(dataConvertida);*/
-        
+
         c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
         c.setCPF(txtCPF.getText());
         c.setRG(txtRG.getText());
@@ -369,8 +369,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
                         "Cliente inserido com sucesso",
                         "Cadastro efetuado",
                         JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
+        }else{
             JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed

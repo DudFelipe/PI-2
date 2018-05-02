@@ -14,7 +14,6 @@ public class ClienteBLL {
             //return "O campo NOME é um campo obrigatório!";
             erros.add("O campo NOME é um campo obrigatório!");
         }
-        
         /*if(c.getDataNascimento() == null){
             //return "O campo DATA DE NASCIMENTO é um campo obrigatório!";
             erros.add("\nO campo DATA DE NASCIMENTO é um campo obrigatório!\n");
@@ -60,6 +59,10 @@ public class ClienteBLL {
             erros.add("\nO campo BAIRRO é um campo obrigatório!");
         }
         
+        if(c.getBairro().trim().length() == 0){
+            //return "O campo BAIRRO é um campo obrigatório!";
+            erros.add("\nO campo BAIRRO é um campo obrigatório!");
+        }
         if(c.getCidade().equals("SELECIONE...")){
             //return "O campo CIDADE é um campo obrigatório!";
             erros.add("\nO campo CIDADE é um campo obrigatório!");
