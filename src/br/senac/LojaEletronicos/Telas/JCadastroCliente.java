@@ -332,8 +332,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        c = new Cliente();
+        c = new Cliente(); //Cria um novo cliente
         
+        //Armazena todos os dados do cliente
         c.setNome(txtNome.getText().toUpperCase());
         
         Date dataConvertida = (Date) txtFmtNascimento.getValue();
@@ -367,19 +368,19 @@ public class JCadastroCliente extends javax.swing.JFrame {
             }
         }
         
-        List<String> msgs = ServicoCliente.cadastrarCliente(c);
+        List<String> msgs = ServicoCliente.cadastrarCliente(c); //Cadastra o cliente
         
-        if(msgs == null){
+        if(msgs == null){ //Caso não exista nenhuma mensagem, o cliente foi cadastrado com sucesso
             JOptionPane.showMessageDialog(rootPane,
                         "Cliente inserido com sucesso",
                         "Cadastro efetuado",
                         JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        }else{ //Caso contrário, mostra todas as mensagens de erro de uma só vez
             JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
         
         c = null;
-        limparCampos();
+        limparCampos(); //Limpa os campos para que seja possível realizar uma nova inserção
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void limparCampos(){
@@ -390,7 +391,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
         txtRG.setText("");
         comboEstadoCivil.setSelectedIndex(0);
         txtEndereco.setText("");
-        txtNumero.setText("");
+        txtNumero.setText("0");
         txtCEP.setText("");
         txtBairro.setText("");
         txtComplemento.setText("");
@@ -398,8 +399,6 @@ public class JCadastroCliente extends javax.swing.JFrame {
         txtTelefone.setText("");
         txtCelular.setText("");
         txtEmail.setText("");
-        
-        txtNome.setFocusable(true);
     }
     
     public static void main(String args[]) {

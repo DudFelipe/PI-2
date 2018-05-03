@@ -480,45 +480,48 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBuscaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        pesquisar();
+        pesquisar(); //Realiza a pesquisa
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tabelaResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaResultadosMouseClicked
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) { //Se a linha da tabela for clicada 2x
             liberarCampos(); //Libera os campos para edição
             preencherCampos(); //Preenche os campos com os dados atuais do cliente, antes de serem alterados
         }
     }//GEN-LAST:event_tabelaResultadosMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        alterar();
+        alterar(); //Altera os dados
+        txtBusca.setText(""); //Limpa o campo de busca
+        pesquisar(); //Faz a pesquisa sem filtro, trazendo todos os clientes cadastrados
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void preencherCampos(){
-        int row = tabelaResultados.getSelectedRow();
+        int row = tabelaResultados.getSelectedRow(); //Armazeno o número da linha selecionada
 
-        Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+        Integer id = (Integer) tabelaResultados.getValueAt(row, 0); //Armazeno o valor existente no campo ID da tabela (tabela da interface)
 
-        Cliente c = ServicoCliente.obterCliente(id);
+        Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que pertence ao ID armazenado
 
-        if (c != null) {
-            txtNome.setText(c.getNome());
+        if (c != null) { //Caso cliente não seja nulo
+            txtNome.setText(c.getNome()); //Preenche o campo com seu nome
 
-            txtFmtNascimento.setText(c.getDataNascimento().toString());
-            comboSexo.setSelectedItem(c.getSexo());
-            txtCPF.setText(c.getCPF());
-            txtRG.setText(c.getRG());
-            comboEstadoCivil.setSelectedItem(c.getEstadoCivil());
-            txtEndereco.setText(c.getEndereco());
-            txtNumero.setText(c.getNumero() + "");
-            txtCEP.setText(c.getCEP());
-            txtBairro.setText(c.getBairro());
-            txtComplemento.setText(c.getComplemento());
-            comboCidade.setSelectedItem(c.getCidade());
-            txtTelefone.setText(c.getTelefoneFixo());
-            txtCelular.setText(c.getCelular());
-            txtEmail.setText(c.getEmail());
+            txtFmtNascimento.setText(c.getDataNascimento().toString()); //Preenche o campo com sua data de nascimento
+            comboSexo.setSelectedItem(c.getSexo()); //Preenche o campo com seu sexo
+            txtCPF.setText(c.getCPF()); //Preenche o campo com seu CPF
+            txtRG.setText(c.getRG()); //Preenche o campo com seu RG
+            comboEstadoCivil.setSelectedItem(c.getEstadoCivil()); //Preenche o campo com seu estado civil
+            txtEndereco.setText(c.getEndereco()); //Preenche o campo com seu endereço
+            txtNumero.setText(c.getNumero() + ""); //Preenche o campo com o número da residência
+            txtCEP.setText(c.getCEP()); //Preenche o campo com seu CEP
+            txtBairro.setText(c.getBairro()); //Preenche o campo com seu bairro
+            txtComplemento.setText(c.getComplemento()); //Preenche o campo com o complemento do endereço
+            comboCidade.setSelectedItem(c.getCidade()); //Preenche o campo com a sua cidade
+            txtTelefone.setText(c.getTelefoneFixo()); //Preenche o campo com seu telefone
+            txtCelular.setText(c.getCelular()); //Preenche o campo com seu celular
+            txtEmail.setText(c.getEmail()); //Preenche o campo com seu email
 
+            //Verificando com a preferencia de contato
             if (c.getPrefContato() == 1) {
                 rbtTelefone.setSelected(true);
             } else {
@@ -534,32 +537,33 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
     }
     
     private void alterar() {
-        int row = tabelaResultados.getSelectedRow();
+        int row = tabelaResultados.getSelectedRow(); //Armazena a linha que foi selecionada
 
-        Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+        Integer id = (Integer) tabelaResultados.getValueAt(row, 0); //Recupera o ID do cliente na linha selecionada
 
-        Cliente c = ServicoCliente.obterCliente(id);
+        Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que possui esse ID
 
         if (c != null) {
-            c.setNome(txtNome.getText().toUpperCase());
+            c.setNome(txtNome.getText().toUpperCase()); //Atualiza o nome do cliente com o que foi digitado no campo NOME
 
             Date dataConvertida = (Date) txtFmtNascimento.getValue();
-            c.setDataNascimento(dataConvertida);
+            c.setDataNascimento(dataConvertida); //Atualiza a data de nascimento do cliente com o que foi digitado no campo DATA DE NASCIMENTO
 
-            c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
-            c.setCPF(txtCPF.getText());
-            c.setRG(txtRG.getText());
-            c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase());
-            c.setEndereco(txtEndereco.getText().toUpperCase());
-            c.setNumero(Integer.parseInt(txtNumero.getText()));
-            c.setCEP(txtCEP.getText());
-            c.setBairro(txtBairro.getText().toUpperCase());
-            c.setComplemento(txtComplemento.getText().toUpperCase());
-            c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase());
-            c.setTelefoneFixo(txtTelefone.getText());
-            c.setCelular(txtCelular.getText());
-            c.setEmail(txtEmail.getText().toUpperCase());
+            c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase()); //Atualiza o sexo do cliente com o que foi selecionado no combo SEXO
+            c.setCPF(txtCPF.getText()); //Atualiza o CPF do cliente com o que foi digitado no campo CPF
+            c.setRG(txtRG.getText()); //Atualiza o RG do cliente com o que foi digitado no campo RG
+            c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase()); //Atualiza o estado civil do cliente com o que foi selecionado no combo ESTADO CIVIL
+            c.setEndereco(txtEndereco.getText().toUpperCase()); //Atualiza o endereço do cliente com o que foi digitado no campo ENDEREÇO
+            c.setNumero(Integer.parseInt(txtNumero.getText())); //Atualiza o número da residência com o que foi digitado no campo NUMERO
+            c.setCEP(txtCEP.getText()); //Atualiza o CEP do cliente com o que foi digitado no campo CEP
+            c.setBairro(txtBairro.getText().toUpperCase()); //Atualiza o bairro do cliente com o que foi digitado no campo BAIRRO
+            c.setComplemento(txtComplemento.getText().toUpperCase()); //Atualiza o complemento do endereço com o que foi digitado no campo COMPLEMENTO
+            c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase()); //Atualiza a cidade do cliente com o que foi selecionado no combo CIDADE
+            c.setTelefoneFixo(txtTelefone.getText()); //Atualiza o telefone fixo do cliente com o que foi digitado no campo TELEFONE FIXO
+            c.setCelular(txtCelular.getText()); //Atualiza o celular do cliente com o que foi digitado no campo CELULAR
+            c.setEmail(txtEmail.getText().toUpperCase()); //Atualiza o email do cliente com o que foi digitado no campo EMAIL
 
+            //Atualizando a preferência de contato com base no radio button selecionado
             if (rbtTelefone.isSelected()) {
                 c.setPrefContato(1);
             } else {
@@ -572,36 +576,38 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
                 }
             }
 
-            List<String> msgs = ServicoCliente.atualizarCliente(c);
+            List<String> msgs = ServicoCliente.atualizarCliente(c); //Realiza a atualização dos dados de fato
 
-            if (msgs == null) {
+            if (msgs == null) { //Caso não exista nenhuma mensagem de erro, a atualização foi realizada com sucesso
                 JOptionPane.showMessageDialog(rootPane,
                         "Cliente inserido com sucesso",
                         "Cadastro efetuado",
                         JOptionPane.INFORMATION_MESSAGE);
-            } else {
+            } else { //Caso contrário, todas as mensagens de erro serão mostradas de uma vez
                 JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
             }
         }
-        limparCampos();
-        bloquearCampos();
+        limparCampos(); //Limpa o conteúdo que foi digitado e selecionado nos combos/radio buttons
+        bloquearCampos(); //Bloqueia os campos novamente
     }
     
     private void pesquisar() {
-        int tipoPesquisa = comboBusca.getSelectedIndex();
+        int tipoPesquisa = comboBusca.getSelectedIndex(); //Verifica se a pesquisa deve ser feita por nome ou por CPF
 
+        //Realiza a busca utilizando o conteúdo existente em txtBusca e o tipo de pesquisa selecionada
         List<Cliente> resultado = ServicoCliente.procurarCliente(txtBusca.getText().toUpperCase(), tipoPesquisa);
 
-        DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel();
-        model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel(); //Armazena o modelo de tabela atual
+        model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
 
-        if (resultado != null && resultado.size() > 0) {
-            for (int i = 0; i < resultado.size(); i++) {
-                Cliente cli = resultado.get(i);
+        if (resultado != null && resultado.size() > 0) { //Verifica se há algum dado retornado da busca
+            for (int i = 0; i < resultado.size(); i++) { //Loop para resgatarmos todos os dados retornados
+                Cliente cli = resultado.get(i); //Cria um cliente
 
                 if (cli != null) {
-                    Object[] row = new Object[6];
+                    Object[] row = new Object[6]; //Cria um vetor de 6 linhas para a tabela
 
+                    //Popula as colunas com os dados do cliente atual
                     row[0] = cli.getId();
                     row[1] = cli.getNome();
                     row[2] = cli.getCPF();
@@ -609,7 +615,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
                     row[4] = cli.getCelular();
                     row[5] = cli.getEmail();
 
-                    model.addRow(row);
+                    model.addRow(row); //Adiciona a linha com todos os dados na tabela da interface
                 }
             }
         }
