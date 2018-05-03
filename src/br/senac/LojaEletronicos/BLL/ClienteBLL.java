@@ -96,6 +96,10 @@ public class ClienteBLL {
             erros.add("\nO campo TELEFONE FIXO não foi preenchido!");
         }
         
+        if(erros.isEmpty()){
+            return null;
+        }
+        
         return erros;
     }
 }

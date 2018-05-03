@@ -318,9 +318,9 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Selecione..."/>
-                <StringItem index="1" value="S&#xe3;o Paulo"/>
-                <StringItem index="2" value="Rio de Janeiro"/>
+                <StringItem index="0" value="SELECIONE..."/>
+                <StringItem index="1" value="S&#xc3;O PAULO"/>
+                <StringItem index="2" value="RIO DE JANEIRO"/>
               </StringArray>
             </Property>
           </Properties>
@@ -440,9 +440,9 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Selecione..."/>
-                <StringItem index="1" value="Masculino"/>
-                <StringItem index="2" value="Feminino"/>
+                <StringItem index="0" value="SELECIONE..."/>
+                <StringItem index="1" value="MASCULINO"/>
+                <StringItem index="2" value="FEMININO"/>
               </StringArray>
             </Property>
           </Properties>
@@ -461,10 +461,10 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Selecione..."/>
-                <StringItem index="1" value="Solteiro(a)"/>
-                <StringItem index="2" value="Casado(a)"/>
-                <StringItem index="3" value="Vi&#xfa;vo(a)"/>
+                <StringItem index="0" value="SELECIONE..."/>
+                <StringItem index="1" value="SOLTEIRO(A)"/>
+                <StringItem index="2" value="CASADO(A)"/>
+                <StringItem index="3" value="VI&#xda;VO(A)"/>
               </StringArray>
             </Property>
           </Properties>

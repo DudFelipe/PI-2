@@ -1,5 +1,11 @@
-
 package br.senac.LojaEletronicos.Telas;
+
+import br.senac.LojaEletronicos.Modelos.Cliente;
+import br.senac.LojaEletronicos.Servico.ServicoCliente;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,8 +23,8 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         panelContato = new javax.swing.JPanel();
         lblTelefone = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
@@ -49,13 +55,13 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         lblSexo = new javax.swing.JLabel();
         txtRG = new javax.swing.JTextField();
         lblRG = new javax.swing.JLabel();
-        txtNascimento = new javax.swing.JTextField();
         lblNascimento = new javax.swing.JLabel();
         comboSexo = new javax.swing.JComboBox<>();
         lblCPF = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
         comboEstadoCivil = new javax.swing.JComboBox<>();
         lblSexo1 = new javax.swing.JLabel();
+        txtFmtNascimento = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaResultados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -66,9 +72,14 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manutenção de Clientes");
 
-        jButton2.setText("Excluir");
+        btnExcluir.setText("Excluir");
 
-        jButton1.setText("Alterar");
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,9 +87,9 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -86,8 +97,8 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir))
                 .addContainerGap())
         );
 
@@ -191,7 +202,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
         lblCidade.setText("Cidade");
 
-        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "São Paulo", "Rio de Janeiro" }));
+        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "SÃO PAULO", "RIO DE JANEIRO" }));
         comboCidade.setEnabled(false);
 
         javax.swing.GroupLayout panelInfoEnderecoLayout = new javax.swing.GroupLayout(panelInfoEndereco);
@@ -263,21 +274,22 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
         lblRG.setText("RG");
 
-        txtNascimento.setEnabled(false);
-
         lblNascimento.setText("Data de nascimento");
 
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Masculino", "Feminino" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "MASCULINO", "FEMININO" }));
         comboSexo.setEnabled(false);
 
         lblCPF.setText("CPF");
 
         txtCPF.setEnabled(false);
 
-        comboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Solteiro(a)", "Casado(a)", "Viúvo(a)" }));
+        comboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "SOLTEIRO(A)", "CASADO(A)", "VIÚVO(A)" }));
         comboEstadoCivil.setEnabled(false);
 
         lblSexo1.setText("Estado Civil");
+
+        txtFmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtFmtNascimento.setEnabled(false);
 
         javax.swing.GroupLayout panelInfoPessoaisLayout = new javax.swing.GroupLayout(panelInfoPessoais);
         panelInfoPessoais.setLayout(panelInfoPessoaisLayout);
@@ -295,14 +307,14 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addGroup(panelInfoPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtRG, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(comboSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, 128, Short.MAX_VALUE))
                         .addGap(2, 2, 2)))
                 .addGap(12, 12, 12)
                 .addGroup(panelInfoPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addComponent(lblNascimento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNascimento))
+                        .addComponent(txtFmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addComponent(lblCPF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +322,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
                     .addGroup(panelInfoPessoaisLayout.createSequentialGroup()
                         .addComponent(lblSexo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(comboEstadoCivil, 0, 128, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
         panelInfoPessoaisLayout.setVerticalGroup(
@@ -321,7 +333,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNascimento)
-                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSexo)
@@ -376,11 +388,11 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF", "Telefone Fixo", "Celular", "Email", "Preferência de Contato"
+                "ID", "Nome", "CPF", "Telefone Fixo", "Celular", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -392,6 +404,11 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tabelaResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaResultadosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabelaResultados);
@@ -463,9 +480,200 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBuscaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        pesquisar();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tabelaResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaResultadosMouseClicked
+        if (evt.getClickCount() == 2) {
+            liberarCampos(); //Libera os campos para edição
+            preencherCampos(); //Preenche os campos com os dados atuais do cliente, antes de serem alterados
+        }
+    }//GEN-LAST:event_tabelaResultadosMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        alterar();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void preencherCampos(){
+        int row = tabelaResultados.getSelectedRow();
+
+        Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+
+        Cliente c = ServicoCliente.obterCliente(id);
+
+        if (c != null) {
+            txtNome.setText(c.getNome());
+
+            txtFmtNascimento.setText(c.getDataNascimento().toString());
+            comboSexo.setSelectedItem(c.getSexo());
+            txtCPF.setText(c.getCPF());
+            txtRG.setText(c.getRG());
+            comboEstadoCivil.setSelectedItem(c.getEstadoCivil());
+            txtEndereco.setText(c.getEndereco());
+            txtNumero.setText(c.getNumero() + "");
+            txtCEP.setText(c.getCEP());
+            txtBairro.setText(c.getBairro());
+            txtComplemento.setText(c.getComplemento());
+            comboCidade.setSelectedItem(c.getCidade());
+            txtTelefone.setText(c.getTelefoneFixo());
+            txtCelular.setText(c.getCelular());
+            txtEmail.setText(c.getEmail());
+
+            if (c.getPrefContato() == 1) {
+                rbtTelefone.setSelected(true);
+            } else {
+                if (c.getPrefContato() == 2) {
+                    rbtCelular.setSelected(true);
+                } else {
+                    if (c.getPrefContato() == 3) {
+                        rbtEmail.setSelected(true);
+                    }
+                }
+            }
+        }
+    }
     
+    private void alterar() {
+        int row = tabelaResultados.getSelectedRow();
+
+        Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+
+        Cliente c = ServicoCliente.obterCliente(id);
+
+        if (c != null) {
+            c.setNome(txtNome.getText().toUpperCase());
+
+            Date dataConvertida = (Date) txtFmtNascimento.getValue();
+            c.setDataNascimento(dataConvertida);
+
+            c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase());
+            c.setCPF(txtCPF.getText());
+            c.setRG(txtRG.getText());
+            c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase());
+            c.setEndereco(txtEndereco.getText().toUpperCase());
+            c.setNumero(Integer.parseInt(txtNumero.getText()));
+            c.setCEP(txtCEP.getText());
+            c.setBairro(txtBairro.getText().toUpperCase());
+            c.setComplemento(txtComplemento.getText().toUpperCase());
+            c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase());
+            c.setTelefoneFixo(txtTelefone.getText());
+            c.setCelular(txtCelular.getText());
+            c.setEmail(txtEmail.getText().toUpperCase());
+
+            if (rbtTelefone.isSelected()) {
+                c.setPrefContato(1);
+            } else {
+                if (rbtCelular.isSelected()) {
+                    c.setPrefContato(2);
+                } else {
+                    if (rbtEmail.isSelected()) {
+                        c.setPrefContato(3);
+                    }
+                }
+            }
+
+            List<String> msgs = ServicoCliente.atualizarCliente(c);
+
+            if (msgs == null) {
+                JOptionPane.showMessageDialog(rootPane,
+                        "Cliente inserido com sucesso",
+                        "Cadastro efetuado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
+            }
+        }
+        limparCampos();
+        bloquearCampos();
+    }
+    
+    private void pesquisar() {
+        int tipoPesquisa = comboBusca.getSelectedIndex();
+
+        List<Cliente> resultado = ServicoCliente.procurarCliente(txtBusca.getText().toUpperCase(), tipoPesquisa);
+
+        DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel();
+        model.setRowCount(0);
+
+        if (resultado != null && resultado.size() > 0) {
+            for (int i = 0; i < resultado.size(); i++) {
+                Cliente cli = resultado.get(i);
+
+                if (cli != null) {
+                    Object[] row = new Object[6];
+
+                    row[0] = cli.getId();
+                    row[1] = cli.getNome();
+                    row[2] = cli.getCPF();
+                    row[3] = cli.getTelefoneFixo();
+                    row[4] = cli.getCelular();
+                    row[5] = cli.getEmail();
+
+                    model.addRow(row);
+                }
+            }
+        }
+    }
+    
+        private void limparCampos(){
+        txtNome.setText("");
+        txtFmtNascimento.setText("");
+        comboSexo.setSelectedIndex(0);
+        txtCPF.setText("");
+        txtRG.setText("");
+        comboEstadoCivil.setSelectedIndex(0);
+        txtEndereco.setText("");
+        txtNumero.setText("");
+        txtCEP.setText("");
+        txtBairro.setText("");
+        txtComplemento.setText("");
+        comboCidade.setSelectedIndex(0);
+        txtTelefone.setText("");
+        txtCelular.setText("");
+        txtEmail.setText("");
+        
+        txtNome.setFocusable(true);
+    }
+    
+        private void liberarCampos() {
+        txtNome.setEnabled(true);
+        txtFmtNascimento.setEnabled(true);
+        comboSexo.setEnabled(true);
+        txtCPF.setEnabled(true);
+        txtRG.setEnabled(true);
+        comboEstadoCivil.setEnabled(true);
+        txtEndereco.setEnabled(true);
+        txtNumero.setEnabled(true);
+        txtCEP.setEnabled(true);
+        txtBairro.setEnabled(true);
+        txtComplemento.setEnabled(true);
+        comboCidade.setEnabled(true);
+        txtTelefone.setEnabled(true);
+        txtCelular.setEnabled(true);
+        txtEmail.setEnabled(true);
+        rbtCelular.setEnabled(true);
+        rbtEmail.setEnabled(true);
+        rbtTelefone.setEnabled(true);
+    }
+    
+    private void bloquearCampos() {
+        txtNome.setEnabled(false);
+        txtFmtNascimento.setEnabled(false);
+        comboSexo.setEnabled(false);
+        txtCPF.setEnabled(false);
+        txtRG.setEnabled(false);
+        comboEstadoCivil.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtNumero.setEnabled(false);
+        txtCEP.setEnabled(false);
+        txtBairro.setEnabled(false);
+        txtComplemento.setEnabled(false);
+        comboCidade.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtCelular.setEnabled(false);
+        txtEmail.setEnabled(false);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -499,13 +707,13 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> comboBusca;
     private javax.swing.JComboBox<String> comboCidade;
     private javax.swing.JComboBox<String> comboEstadoCivil;
     private javax.swing.JComboBox<String> comboSexo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -541,7 +749,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtNascimento;
+    private javax.swing.JFormattedTextField txtFmtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRG;

@@ -2,6 +2,7 @@
 package br.senac.LojaEletronicos.Telas;
 
 import br.senac.LojaEletronicos.BLL.ClienteBLL;
+import br.senac.LojaEletronicos.Mock.MockCliente;
 import br.senac.LojaEletronicos.Modelos.Cliente;
 import br.senac.LojaEletronicos.Servico.ServicoCliente;
 import java.util.Date;
@@ -14,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class JCadastroCliente extends javax.swing.JFrame {
 
+    private Cliente c = null;
+    
     public JCadastroCliente() {
         initComponents();
     }
@@ -159,7 +162,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblCidade.setText("Cidade");
 
-        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "São Paulo", "Rio de Janeiro" }));
+        comboCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "SÃO PAULO", "RIO DE JANEIRO" }));
 
         javax.swing.GroupLayout panelInfoEnderecoLayout = new javax.swing.GroupLayout(panelInfoEndereco);
         panelInfoEndereco.setLayout(panelInfoEnderecoLayout);
@@ -228,11 +231,11 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         lblNascimento.setText("Data de nascimento");
 
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Masculino", "Feminino" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "MASCULINO", "FEMININO" }));
 
         lblCPF.setText("CPF");
 
-        comboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Solteiro(a)", "Casado(a)", "Viúvo(a)" }));
+        comboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE...", "SOLTEIRO(A)", "CASADO(A)", "VIÚVO(A)" }));
 
         lblSexo1.setText("Estado Civil");
 
@@ -329,7 +332,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Cliente c = new Cliente();
+        c = new Cliente();
         
         c.setNome(txtNome.getText().toUpperCase());
         
@@ -366,7 +369,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
         
         List<String> msgs = ServicoCliente.cadastrarCliente(c);
         
-        if(msgs.isEmpty()){
+        if(msgs == null){
             JOptionPane.showMessageDialog(rootPane,
                         "Cliente inserido com sucesso",
                         "Cadastro efetuado",
@@ -374,8 +377,31 @@ public class JCadastroCliente extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
+        
+        c = null;
+        limparCampos();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void limparCampos(){
+        txtNome.setText("");
+        txtFmtNascimento.setText("");
+        comboSexo.setSelectedIndex(0);
+        txtCPF.setText("");
+        txtRG.setText("");
+        comboEstadoCivil.setSelectedIndex(0);
+        txtEndereco.setText("");
+        txtNumero.setText("");
+        txtCEP.setText("");
+        txtBairro.setText("");
+        txtComplemento.setText("");
+        comboCidade.setSelectedIndex(0);
+        txtTelefone.setText("");
+        txtCelular.setText("");
+        txtEmail.setText("");
+        
+        txtNome.setFocusable(true);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
