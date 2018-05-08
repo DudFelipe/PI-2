@@ -44,7 +44,7 @@ public class ClienteBLL {
             erros.add("\nO campo ENDEREÇO é um campo obrigatório!");
         }
         
-        if(c.getNumero() <= 0){
+        if(c.getNumero() <= 0){ //NAO DEIXAR ENTRAR CARACTERES, ARRUMAR!!!
             //return "O número digitado é inválido";
             erros.add("\nO número digitado é inválido!");
         }
@@ -78,7 +78,7 @@ public class ClienteBLL {
             erros.add("\nO campo EMAIL é um campo obrigatório");
         }
 
-        if(!c.getEmail().contains("@")){
+        if(!c.getEmail().contains("@") && !c.getEmail().contains(".com")){
             //return "O email digitado não é válido!";
             erros.add("\nO email digitado não é válido!");
         }

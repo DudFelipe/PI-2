@@ -12,7 +12,7 @@ public class Cliente {
     private String RG;
     private String estadoCivil;
     private String endereco;
-    private int numero;
+    private Integer numero;
     private String CEP;
     private String bairro;
     private String complemento;
@@ -125,11 +125,11 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

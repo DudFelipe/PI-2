@@ -73,6 +73,11 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         setTitle("Manutenção de Clientes");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -496,6 +501,10 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         pesquisar(); //Faz a pesquisa sem filtro, trazendo todos os clientes cadastrados
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     private void preencherCampos(){
         int row = tabelaResultados.getSelectedRow(); //Armazeno o número da linha selecionada
 
@@ -536,56 +545,86 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         }
     }
     
-    private void alterar() {
-        int row = tabelaResultados.getSelectedRow(); //Armazena a linha que foi selecionada
+    private void excluir(){
+        try{
+            int row = tabelaResultados.getSelectedRow();
 
-        Integer id = (Integer) tabelaResultados.getValueAt(row, 0); //Recupera o ID do cliente na linha selecionada
+            Integer id = (Integer)tabelaResultados.getValueAt(row, 0);
 
-        Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que possui esse ID
+            Cliente c = ServicoCliente.obterCliente(id);
 
-        if (c != null) {
-            c.setNome(txtNome.getText().toUpperCase()); //Atualiza o nome do cliente com o que foi digitado no campo NOME
+            if(c != null){
+                List<String> msg = ServicoCliente.excluirCliente(id);
 
-            Date dataConvertida = (Date) txtFmtNascimento.getValue();
-            c.setDataNascimento(dataConvertida); //Atualiza a data de nascimento do cliente com o que foi digitado no campo DATA DE NASCIMENTO
-
-            c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase()); //Atualiza o sexo do cliente com o que foi selecionado no combo SEXO
-            c.setCPF(txtCPF.getText()); //Atualiza o CPF do cliente com o que foi digitado no campo CPF
-            c.setRG(txtRG.getText()); //Atualiza o RG do cliente com o que foi digitado no campo RG
-            c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase()); //Atualiza o estado civil do cliente com o que foi selecionado no combo ESTADO CIVIL
-            c.setEndereco(txtEndereco.getText().toUpperCase()); //Atualiza o endereço do cliente com o que foi digitado no campo ENDEREÇO
-            c.setNumero(Integer.parseInt(txtNumero.getText())); //Atualiza o número da residência com o que foi digitado no campo NUMERO
-            c.setCEP(txtCEP.getText()); //Atualiza o CEP do cliente com o que foi digitado no campo CEP
-            c.setBairro(txtBairro.getText().toUpperCase()); //Atualiza o bairro do cliente com o que foi digitado no campo BAIRRO
-            c.setComplemento(txtComplemento.getText().toUpperCase()); //Atualiza o complemento do endereço com o que foi digitado no campo COMPLEMENTO
-            c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase()); //Atualiza a cidade do cliente com o que foi selecionado no combo CIDADE
-            c.setTelefoneFixo(txtTelefone.getText()); //Atualiza o telefone fixo do cliente com o que foi digitado no campo TELEFONE FIXO
-            c.setCelular(txtCelular.getText()); //Atualiza o celular do cliente com o que foi digitado no campo CELULAR
-            c.setEmail(txtEmail.getText().toUpperCase()); //Atualiza o email do cliente com o que foi digitado no campo EMAIL
-
-            //Atualizando a preferência de contato com base no radio button selecionado
-            if (rbtTelefone.isSelected()) {
-                c.setPrefContato(1);
-            } else {
-                if (rbtCelular.isSelected()) {
-                    c.setPrefContato(2);
-                } else {
-                    if (rbtEmail.isSelected()) {
-                        c.setPrefContato(3);
-                    }
+                if(msg == null){
+                    JOptionPane.showMessageDialog(rootPane,
+                            "Cliente excluído com sucesso",
+                            "Excluir",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, msg, "Erro!", 0);
                 }
             }
+        }catch(Exception e){
+            
+        }
+    }
+    
+    private void alterar() {
+        try{
+            int row = tabelaResultados.getSelectedRow(); //Armazena a linha que foi selecionada
 
-            List<String> msgs = ServicoCliente.atualizarCliente(c); //Realiza a atualização dos dados de fato
+            Integer id = (Integer) tabelaResultados.getValueAt(row, 0); //Recupera o ID do cliente na linha selecionada
 
-            if (msgs == null) { //Caso não exista nenhuma mensagem de erro, a atualização foi realizada com sucesso
-                JOptionPane.showMessageDialog(rootPane,
-                        "Cliente inserido com sucesso",
-                        "Cadastro efetuado",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else { //Caso contrário, todas as mensagens de erro serão mostradas de uma vez
-                JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
+            Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que possui esse ID
+
+            if (c != null) {
+                c.setNome(txtNome.getText().toUpperCase()); //Atualiza o nome do cliente com o que foi digitado no campo NOME
+
+                Date dataConvertida = (Date) txtFmtNascimento.getValue();
+                c.setDataNascimento(dataConvertida); //Atualiza a data de nascimento do cliente com o que foi digitado no campo DATA DE NASCIMENTO
+
+                c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase()); //Atualiza o sexo do cliente com o que foi selecionado no combo SEXO
+                c.setCPF(txtCPF.getText()); //Atualiza o CPF do cliente com o que foi digitado no campo CPF
+                c.setRG(txtRG.getText()); //Atualiza o RG do cliente com o que foi digitado no campo RG
+                c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase()); //Atualiza o estado civil do cliente com o que foi selecionado no combo ESTADO CIVIL
+                c.setEndereco(txtEndereco.getText().toUpperCase()); //Atualiza o endereço do cliente com o que foi digitado no campo ENDEREÇO
+                c.setNumero(Integer.parseInt(txtNumero.getText())); //Atualiza o número da residência com o que foi digitado no campo NUMERO
+                c.setCEP(txtCEP.getText()); //Atualiza o CEP do cliente com o que foi digitado no campo CEP
+                c.setBairro(txtBairro.getText().toUpperCase()); //Atualiza o bairro do cliente com o que foi digitado no campo BAIRRO
+                c.setComplemento(txtComplemento.getText().toUpperCase()); //Atualiza o complemento do endereço com o que foi digitado no campo COMPLEMENTO
+                c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase()); //Atualiza a cidade do cliente com o que foi selecionado no combo CIDADE
+                c.setTelefoneFixo(txtTelefone.getText()); //Atualiza o telefone fixo do cliente com o que foi digitado no campo TELEFONE FIXO
+                c.setCelular(txtCelular.getText()); //Atualiza o celular do cliente com o que foi digitado no campo CELULAR
+                c.setEmail(txtEmail.getText().toUpperCase()); //Atualiza o email do cliente com o que foi digitado no campo EMAIL
+
+                //Atualizando a preferência de contato com base no radio button selecionado
+                if (rbtTelefone.isSelected()) {
+                    c.setPrefContato(1);
+                } else {
+                    if (rbtCelular.isSelected()) {
+                        c.setPrefContato(2);
+                    } else {
+                        if (rbtEmail.isSelected()) {
+                            c.setPrefContato(3);
+                        }
+                    }
+                }
+
+                List<String> msgs = ServicoCliente.atualizarCliente(c); //Realiza a atualização dos dados de fato
+
+                if (msgs == null) { //Caso não exista nenhuma mensagem de erro, a atualização foi realizada com sucesso
+                    JOptionPane.showMessageDialog(rootPane,
+                            "Cliente inserido com sucesso",
+                            "Cadastro efetuado",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else { //Caso contrário, todas as mensagens de erro serão mostradas de uma vez
+                    JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
+                }
             }
+        }catch(Exception e){
+            
         }
         limparCampos(); //Limpa o conteúdo que foi digitado e selecionado nos combos/radio buttons
         bloquearCampos(); //Bloqueia os campos novamente
@@ -678,6 +717,9 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         txtTelefone.setEnabled(false);
         txtCelular.setEnabled(false);
         txtEmail.setEnabled(false);
+        rbtCelular.setEnabled(false);
+        rbtEmail.setEnabled(false);
+        rbtTelefone.setEnabled(false);
     }
 
     public static void main(String args[]) {
