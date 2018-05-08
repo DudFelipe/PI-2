@@ -53,7 +53,7 @@ public class MockCliente {
                 }
                 contador++; //Caso o cliente não tenha sido encontrado, avança para o próximo
             }
-        } else { //Caso não exista nenhum cliente, informa o usuário
+        } else { //Caso não exista nenhum cliente, informa o usuário.
             throw new Exception("Não há cliente para atualizar!");
         }
     }
