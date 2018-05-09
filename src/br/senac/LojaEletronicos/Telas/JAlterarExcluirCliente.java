@@ -515,7 +515,7 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
         if (c != null) { //Caso cliente não seja nulo
             txtNome.setText(c.getNome()); //Preenche o campo com seu nome
 
-            txtFmtNascimento.setText(c.getDataNascimento().toString()); //Preenche o campo com sua data de nascimento
+            txtFmtNascimento.setValue(c.getDataNascimento()); //Preenche o campo com sua data de nascimento
             comboSexo.setSelectedItem(c.getSexo()); //Preenche o campo com seu sexo
             txtCPF.setText(c.getCPF()); //Preenche o campo com seu CPF
             txtRG.setText(c.getRG()); //Preenche o campo com seu RG
@@ -616,8 +616,8 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
                 if (msgs == null) { //Caso não exista nenhuma mensagem de erro, a atualização foi realizada com sucesso
                     JOptionPane.showMessageDialog(rootPane,
-                            "Cliente inserido com sucesso",
-                            "Cadastro efetuado",
+                            "Cliente alterado com sucesso",
+                            "Alteração efetuada",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else { //Caso contrário, todas as mensagens de erro serão mostradas de uma vez
                     JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);

@@ -31,7 +31,7 @@ public class Cliente {
         RG = "";
         estadoCivil = "";
         endereco = "";
-        numero = 0;
+        numero = null;
         CEP = "";
         bairro = "";
         complemento = "";
