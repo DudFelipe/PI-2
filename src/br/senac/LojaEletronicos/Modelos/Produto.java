@@ -9,7 +9,7 @@ package br.senac.LojaEletronicos.Modelos;
  *
  * @author giovanebarreira
  */
-public class Produto {
+public class Produto implements Cloneable {
     private String nome, fabricante, modelo, dimensoes, observacoes;
     private Integer idProduto, quantidade;
     private Float preco;
@@ -25,6 +25,14 @@ public class Produto {
         observacoes = "";
           
                 
+    }
+    
+    public Produto getClone(){
+        try{
+            return (Produto)super.clone();
+        }catch(CloneNotSupportedException e){
+            return this;
+        }
     }
     
     public void mostraProduto(){

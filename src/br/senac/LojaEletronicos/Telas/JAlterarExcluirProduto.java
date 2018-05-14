@@ -336,20 +336,23 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             Integer id = (Integer) jTabelaResultados.getValueAt(row, 0); // recupera o id do produto na linha selecionada
 
             Produto p = ServicoProduto.obterProduto(id); // Obter o produto que possui esse ID.
-
-            if(p != null){
-                p.setNome(txtNomeProd.getText().toUpperCase()); // Atualiza o nome do produto com o que foi digitado no campo Nome
-                p.setFabricante(txtFabricante.getText().toUpperCase()); // atualiza o nome do fabricante
-                p.setModelo(txtModelo.getText().toUpperCase()); // atualiza o modelo do produto
-                p.setPreco(Float.valueOf(txtPreco.getText())); // atualiza o preco
-                p.setQuantidade(Integer.parseInt(txtQuantidade.getText())); // atualiza a quantidade
-                p.setDimensoes(txtDimensoes.getText()); // atualiza as dimensões
-                p.setObservacoes(txtObservacoes.getText().toUpperCase()); // atualiza o campo observações
+           
+            Produto copiaP = p.getClone();
+            
+            
+            ///verificar se os campos estao vazios
+            if(copiaP != null){
+                copiaP.setNome(txtNomeProd.getText().toUpperCase()); // Atualiza o nome do produto com o que foi digitado no campo Nome
+                copiaP.setFabricante(txtFabricante.getText().toUpperCase()); // atualiza o nome do fabricante
+                copiaP.setModelo(txtModelo.getText().toUpperCase()); // atualiza o modelo do produto
+                copiaP.setPreco(Float.valueOf(txtPreco.getText())); // atualiza o preco
+                copiaP.setQuantidade(Integer.parseInt(txtQuantidade.getText())); // atualiza a quantidade
+                copiaP.setDimensoes(txtDimensoes.getText()); // atualiza as dimensões
+                copiaP.setObservacoes(txtObservacoes.getText().toUpperCase()); // atualiza o campo observações
 
             }
-
-            List<String> mensagens = ServicoProduto.atualizarProduto(p); // Faz a atualizacao de todos os campos
-
+            
+            List<String> mensagens = ServicoProduto.atualizarProduto(copiaP); // Faz a atualizacao de todos os campos
             if(mensagens == null){ 
                 JOptionPane.showMessageDialog(rootPane,
                                                "Produto inserido com sucesso",
@@ -358,7 +361,10 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
 
             }else{ // caso contrario, todas as mensagens de erro serão mostradas de uma vez
                 JOptionPane.showMessageDialog(null, mensagens, "Erro", 0);
+                
             }
+
+           
             limparCamposProduto(); // Limpa o conteudo que foram digitados
             bloquearCamposProdutos(); // Bloqueia os campos novamente
        }catch(Exception e){

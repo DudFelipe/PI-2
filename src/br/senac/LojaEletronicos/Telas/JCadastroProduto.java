@@ -9,7 +9,6 @@ import br.senac.LojaEletronicos.BLL.ProdutoBLL;
 import br.senac.LojaEletronicos.Mock.MockProduto;
 import br.senac.LojaEletronicos.Modelos.Produto;
 import br.senac.LojaEletronicos.Servico.ServicoProduto;
-import com.placeholder.PlaceHolder;
 import java.util.List;
 import javax.swing.JOptionPane;
 /**
