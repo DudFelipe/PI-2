@@ -22,9 +22,7 @@ public class Produto implements Cloneable {
         preco = 0.0f;
         quantidade = 0;
         dimensoes = "";
-        observacoes = "";
-          
-                
+        observacoes = "";        
     }
     
     public Produto getClone(){
