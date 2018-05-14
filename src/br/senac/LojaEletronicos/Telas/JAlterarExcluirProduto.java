@@ -339,8 +339,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
            
             Produto copiaP = p.getClone();
             
-            
-            ///verificar se os campos estao vazios
             if(copiaP != null){
                 copiaP.setNome(txtNomeProd.getText().toUpperCase()); // Atualiza o nome do produto com o que foi digitado no campo Nome
                 copiaP.setFabricante(txtFabricante.getText().toUpperCase()); // atualiza o nome do fabricante
