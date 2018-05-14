@@ -3,7 +3,7 @@ package br.senac.LojaEletronicos.Modelos;
 
 import java.util.Date;
 
-public class Cliente {
+public class Cliente implements Cloneable{
     private Integer idCliente;
     private String nome;
     private Date dataNascimento;
@@ -40,6 +40,15 @@ public class Cliente {
         celular = "";
         email = "";
         prefContato = -1;
+    }
+    
+    public Cliente getClone(){
+        try{
+            return (Cliente)super.clone();
+        }
+        catch(CloneNotSupportedException e){
+            return this;
+        }
     }
     
     public void mostraCliente(){
