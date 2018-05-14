@@ -4,16 +4,52 @@
  * and open the template in the editor.
  */
 package br.senac.LojaEletronicos.Telas;
+import br.senac.LojaEletronicos.Modelos.Cliente;
+import br.senac.LojaEletronicos.Servico.ServicoCliente;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author eduar
+ * @author evie
  */
 public class JIncluirCliente extends javax.swing.JFrame {
+    
+    private void pesquisar() {
+        int tipoPesquisa = comboOpcaoDeBusca.getSelectedIndex(); //Verifica se a pesquisa deve ser feita por nome ou por CPF
 
-    /**
-     * Creates new form JAlterarExcluirCliente
-     */
+        //Realiza a busca utilizando o conteúdo existente em txtBusca e o tipo de pesquisa selecionada
+        List<Cliente> resultado = ServicoCliente.procurarCliente(digitarItemDePesquisa.getText().toUpperCase(), tipoPesquisa);
+
+        DefaultTableModel model = (DefaultTableModel) tableClientes.getModel(); //Armazena o modelo de tabela atual
+        model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
+
+        if (resultado != null && resultado.size() > 0) { //Verifica se há algum dado retornado da busca
+            for (int i = 0; i < resultado.size(); i++) { //Loop para resgatarmos todos os dados retornados
+                Cliente cli = resultado.get(i); //Cria um cliente
+
+                if (cli != null) {
+                    Object[] row = new Object[6]; //Cria um vetor de 6 linhas para a tabela
+
+                    //Popula as colunas com os dados do cliente atual
+                    row[0] = cli.getId();
+                    row[1] = cli.getNome();
+                    row[2] = cli.getCPF();
+                    row[3] = cli.getTelefoneFixo();
+                    row[4] = cli.getCelular();
+                    row[5] = cli.getEmail();
+
+                    model.addRow(row); //Adiciona a linha com todos os dados na tabela da interface
+                }
+            }
+        }else{
+            Object msgs = "Nenhum cadastro encontrado.";
+            JOptionPane.showMessageDialog(null, msgs, "Erro", 0);
+        }
+    }
+    
     public JIncluirCliente() {
         initComponents();
     }
@@ -29,21 +65,31 @@ public class JIncluirCliente extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        buttonCancelar = new javax.swing.JButton();
+        buttonSelecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        tableClientes = new javax.swing.JTable();
+        buscaCliente = new javax.swing.JLabel();
+        comboOpcaoDeBusca = new javax.swing.JComboBox<>();
+        digitarItemDePesquisa = new javax.swing.JTextField();
+        jBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manutenção de Clientes");
 
-        jButton2.setText("Cancelar");
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Selecionar");
+        buttonSelecionar.setText("Selecionar");
+        buttonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelecionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -51,9 +97,9 @@ public class JIncluirCliente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -61,8 +107,8 @@ public class JIncluirCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(buttonSelecionar)
+                    .addComponent(buttonCancelar))
                 .addContainerGap())
         );
 
@@ -83,7 +129,7 @@ public class JIncluirCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,18 +152,23 @@ public class JIncluirCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableClientes);
 
-        jLabel1.setText("Busca por");
+        buscaCliente.setText("Busca por");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboOpcaoDeBusca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF" }));
+        comboOpcaoDeBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboOpcaoDeBuscaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Buscar");
+        jBuscar.setText("Buscar");
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,14 +184,14 @@ public class JIncluirCliente extends javax.swing.JFrame {
                 .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(digitarItemDePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboOpcaoDeBusca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(13, 13, 13)))
                 .addGap(99, 99, 99))
         );
@@ -149,12 +200,12 @@ public class JIncluirCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(comboOpcaoDeBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscaCliente))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(digitarItemDePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,10 +216,66 @@ public class JIncluirCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboOpcaoDeBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOpcaoDeBuscaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        
+    }//GEN-LAST:event_comboOpcaoDeBuscaActionPerformed
 
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+        // TODO add your handling code here:
+        pesquisar();
+    }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void buttonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelecionarActionPerformed
+        // TODO add your handling code here
+        int row = tableClientes.getSelectedRow();
+        Integer id = (Integer) tableClientes.getValueAt(row, 0);
+        Cliente c = ServicoCliente.obterCliente(id);
+        
+        
+        
+        if(row>=0){
+            
+            c.getId();
+            
+            
+            
+        }else{
+            Object msgs = "Por favor, selecione um cadastro.";
+            JOptionPane.showMessageDialog(null, msgs, "Cadastro não selecionado.", 0);
+        }
+        
+    }//GEN-LAST:event_buttonSelecionarActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {                                              
+        if (evt.getClickCount() == 2) { //Se a linha da tabela for clicada 2x
+           Cliente c = dadosCliente();
+           
+        }
+    }                                       
+    
+    private Cliente dadosCliente(){
+        int row = tableClientes.getSelectedRow(); //Armazeno o número da linha selecionada
+
+        Integer id = (Integer) tableClientes.getValueAt(row, 0); //Armazeno o valor existente no campo ID da tabela (tabela da interface)
+
+        Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que pertence ao ID armazenado  
+        
+        if(c != null){
+            return c;
+        }
+        else{
+            return null;
+        }
+    }
+         
+    
     /**
      * @param args the command line arguments
      */
@@ -206,15 +313,15 @@ public class JIncluirCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel buscaCliente;
+    private javax.swing.JButton buttonCancelar;
+    private javax.swing.JButton buttonSelecionar;
+    private javax.swing.JComboBox<String> comboOpcaoDeBusca;
+    private javax.swing.JTextField digitarItemDePesquisa;
+    private javax.swing.JButton jBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableClientes;
     // End of variables declaration//GEN-END:variables
 }
