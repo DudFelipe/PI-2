@@ -5,7 +5,11 @@
  */
 package br.senac.LojaEletronicos.Telas;
 
+import br.senac.LojaEletronicos.JIncluirProduto;
 import javax.swing.JFrame;
+import br.senac.LojaEletronicos.Modelos.Cliente;
+import br.senac.LojaEletronicos.JIncluirProduto;
+import br.senac.LojaEletronicos.Modelos.Produto;
 
 /**
  *
@@ -72,6 +76,12 @@ public class JVendas extends javax.swing.JFrame {
         cep = new javax.swing.JTextField();
         quantidade = new javax.swing.JLabel();
         bQuantidade = new javax.swing.JTextField();
+        jPrecoDoProduto = new javax.swing.JLabel();
+        jTexPreco = new javax.swing.JTextField();
+        jCodProduto = new javax.swing.JLabel();
+        jTextCodProduto = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextData = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vender produtos");
@@ -121,9 +131,8 @@ public class JVendas extends javax.swing.JFrame {
         });
 
         codigoProduto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        codigoProduto.setText("Código: ");
+        codigoProduto.setText("Produto");
 
-        jTextField1.setText("2528");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -145,8 +154,6 @@ public class JVendas extends javax.swing.JFrame {
 
         jPONumber.setText("N° PEDIDO");
 
-        numeroPedido.setText("12345");
-
         NomeCliente.setText("Cliente :");
 
         pesquisarCliente.setText("Pesquisar");
@@ -156,17 +163,19 @@ public class JVendas extends javax.swing.JFrame {
             }
         });
 
-        nomeBuscado.setText("João Bezerra da Silva Ferraz");
+        nomeBuscado.setToolTipText("");
+        nomeBuscado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeBuscadoActionPerformed(evt);
+            }
+        });
 
         clienteID.setText("Codigo do cliente:");
-
-        ID.setText("450054789");
 
         buscaEndereço.setText("Endereço:");
 
         buscaNumero.setText("N° :");
 
-        numero.setText("2300");
         numero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroActionPerformed(evt);
@@ -183,106 +192,136 @@ public class JVendas extends javax.swing.JFrame {
 
         buscaBairro.setText("Bairro:");
 
-        endereço.setText("Avenida Paulista");
-
-        complemento.setText("20° andar");
-
-        bairro.setText("Consolação");
-
-        cidade.setText("Pernambuco");
-
-        estado.setText("SP");
-
-        cep.setText("01310-300");
-
         quantidade.setText("Quantidade:");
 
-        bQuantidade.setText("10");
+        jPrecoDoProduto.setText("Preço:");
+
+        jTexPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTexPrecoActionPerformed(evt);
+            }
+        });
+
+        jCodProduto.setText("Codigo do produto :");
+
+        jLabel1.setText("Data :");
 
         javax.swing.GroupLayout telaVendasLayout = new javax.swing.GroupLayout(telaVendas);
         telaVendas.setLayout(telaVendasLayout);
         telaVendasLayout.setHorizontalGroup(
             telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telaVendasLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaVendasLayout.createSequentialGroup()
-                        .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(telaVendasLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPONumber)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(numeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(valorTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(telaVendasLayout.createSequentialGroup()
-                                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(adicionarItem)
-                                    .addComponent(removerItem))
-                                .addGap(11, 11, 11))))
                     .addGroup(telaVendasLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(NomeCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pesquisarCliente)
-                        .addGap(18, 18, 18)
-                        .addComponent(clienteID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(descricao)
-                    .addGroup(telaVendasLayout.createSequentialGroup()
-                        .addComponent(cancelarVenda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(concuirVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(telaVendasLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(telaVendasLayout.createSequentialGroup()
-                                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, telaVendasLayout.createSequentialGroup()
-                                        .addComponent(codigoProduto)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(buscarProduto)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(quantidade))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, telaVendasLayout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(buscaCidade)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(63, 63, 63)
-                                        .addComponent(buscaEstado)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane2)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaVendasLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1)
                                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaCEP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(bQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(quantidade)))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(removerItem))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(adicionarItem)))
+                                .addGap(12, 12, 12))
                             .addGroup(telaVendasLayout.createSequentialGroup()
-                                .addComponent(buscaEndereço)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(endereço, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buscaNumero)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                                .addComponent(codigoProduto)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(buscarProduto)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                                .addComponent(buscaCidade)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(63, 63, 63)
+                                                .addComponent(buscaEstado)))
+                                        .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                                .addGap(45, 45, 45)
+                                                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(buscaCEP)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                                .addGap(31, 31, 31)
+                                                .addComponent(jCodProduto)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(jPrecoDoProduto))))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addComponent(buscaEndereço)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(endereço, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(buscaNumero)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(buscaComplemento)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(complemento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buscaComplemento)
-                                .addGap(10, 10, 10)
-                                .addComponent(complemento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscaBairro)
+                                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addGap(0, 17, Short.MAX_VALUE)
+                                        .addComponent(buscaBairro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addComponent(jTexPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(descricao)
+                                    .addGroup(telaVendasLayout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(NomeCliente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nomeBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(pesquisarCliente)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(clienteID)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(telaVendasLayout.createSequentialGroup()
+                                .addComponent(cancelarVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(concuirVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(telaVendasLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(jPONumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(numeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         telaVendasLayout.setVerticalGroup(
@@ -315,46 +354,55 @@ public class JVendas extends javax.swing.JFrame {
                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscaCEP)
                     .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(codigoProduto)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarProduto)
-                    .addComponent(quantidade)
-                    .addComponent(bQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPrecoDoProduto)
+                    .addComponent(jTexPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCodProduto)
+                    .addComponent(jTextCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addComponent(descricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(telaVendasLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(quantidade)
+                        .addGap(5, 5, 5)
+                        .addComponent(bQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(adicionarItem)
                         .addGap(18, 18, 18)
                         .addComponent(removerItem)
-                        .addGap(18, 18, 18)
-                        .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(telaVendasLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPONumber)
-                    .addComponent(numeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarVenda)
                     .addComponent(concuirVenda))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 29, Short.MAX_VALUE)
-                .addComponent(telaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(telaVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,7 +416,7 @@ public class JVendas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -397,18 +445,30 @@ public class JVendas extends javax.swing.JFrame {
 
     private void pesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarClienteActionPerformed
         if(ic == null || !ic.isDisplayable()){
-            ic = new JIncluirCliente();
+            ic = new JIncluirCliente(this, true);
             ic.pack();
             ic.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             ic.setLocationRelativeTo(null);
             ic.setVisible(true);
         }
         ic.toFront();
+        
+        Cliente c = ic.selecionar();
+        nomeBuscado.setText(c.getNome());
+        numero.setText(c.getNumero() + "");
+        estado.setText(c.getEndereco());
+        bairro.setText(c.getBairro());
+        cep.setText(c.getCEP());
+        endereço.setText(c.getEndereco());
+        ID.setText(c.getId()+"");
+        cidade.setText(c.getCidade());
+        complemento.setText(c.getComplemento());
+        
     }//GEN-LAST:event_pesquisarClienteActionPerformed
 
     private void buscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProdutoActionPerformed
-        if(ip==null || ip.isDisplayable()){
-            ip = new JIncluirProduto();
+        if(ip==null || !ip.isDisplayable()){
+            ip = new JIncluirProdutos(this,true);
             ip.pack();
             ip.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             ip.setLocationRelativeTo(null);
@@ -420,6 +480,14 @@ public class JVendas extends javax.swing.JFrame {
     private void cancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarVendaActionPerformed
+
+    private void nomeBuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeBuscadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeBuscadoActionPerformed
+
+    private void jTexPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTexPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTexPrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,11 +550,17 @@ public class JVendas extends javax.swing.JFrame {
     private javax.swing.JTextArea descricaoProduto;
     private javax.swing.JTextField endereço;
     private javax.swing.JTextField estado;
+    private javax.swing.JLabel jCodProduto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jPONumber;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jPrecoDoProduto;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTexPreco;
+    private javax.swing.JTextField jTextCodProduto;
+    private javax.swing.JTextField jTextData;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jValor;
     private javax.swing.JTextField nomeBuscado;
