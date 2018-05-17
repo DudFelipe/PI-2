@@ -60,7 +60,7 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Fabricante", "Preço", "Modelo", "Dimensões", "Qtde"
+                "Código", "Nome", "Fabricante", "Modelo", "Preço", "Dimensões", "Qtde"
             }
         ) {
             Class[] types = new Class [] {

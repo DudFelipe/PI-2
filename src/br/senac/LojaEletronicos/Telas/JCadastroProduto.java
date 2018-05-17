@@ -184,15 +184,17 @@ public class JCadastroProduto extends javax.swing.JFrame {
        p.setNome(txtNomeProd.getText().toUpperCase());
        p.setFabricante(txtFabricante.getText().toUpperCase());
        p.setModelo(txtModelo.getText().toUpperCase());
+      
        
-       try{
-           p.setPreco(Float.valueOf(txtPreco.getText()));
+      
+        try{
+            p.setPreco(Float.parseFloat(txtPreco.getText()));
        }catch(Exception e){
            
        }
        
        try{
-           p.setQuantidade(Integer.parseInt(txtQuantidade.getText().toUpperCase()));
+           p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
        }catch(Exception e){
            
        }
