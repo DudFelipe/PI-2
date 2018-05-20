@@ -5,10 +5,10 @@
  */
 package br.senac.LojaEletronicos.Telas;
 
-import br.senac.LojaEletronicos.JIncluirProduto;
+import br.senac.LojaEletronicos.Telas.JIncluirProdutos;
 import javax.swing.JFrame;
 import br.senac.LojaEletronicos.Modelos.Cliente;
-import br.senac.LojaEletronicos.JIncluirProduto;
+import br.senac.LojaEletronicos.Telas.JIncluirProdutos;
 import br.senac.LojaEletronicos.Modelos.Produto;
 
 /**
@@ -19,7 +19,7 @@ import br.senac.LojaEletronicos.Modelos.Produto;
 
 public class JVendas extends javax.swing.JFrame {
     JIncluirCliente ic = null;
-    JIncluirProduto ip = null;
+    JIncluirProdutos ip = null;
     /**
      * Creates new form JVendas
      */
