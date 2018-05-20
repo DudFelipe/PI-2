@@ -152,7 +152,6 @@ public class JCadastroCliente extends javax.swing.JFrame {
         lblNumero.setText("Número");
 
         txtNumero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNumero.setText("0");
 
         lblCEP.setText("CEP");
 
@@ -345,7 +344,11 @@ public class JCadastroCliente extends javax.swing.JFrame {
         c.setRG(txtRG.getText());
         c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase());
         c.setEndereco(txtEndereco.getText().toUpperCase());
-        c.setNumero(Integer.parseInt(txtNumero.getText()));
+        
+        try{
+            c.setNumero(Integer.parseInt(txtNumero.getText()));
+        }catch(Exception e){}
+        
         c.setCEP(txtCEP.getText());
         c.setBairro(txtBairro.getText().toUpperCase());
         c.setComplemento(txtComplemento.getText().toUpperCase());

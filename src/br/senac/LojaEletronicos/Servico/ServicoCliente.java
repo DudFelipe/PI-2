@@ -16,9 +16,7 @@ public class ServicoCliente {
 
         resposta = ClienteBLL.validaCliente(cliente);
 
-        System.out.println("TESTE 1");
         if (resposta == null) {
-            System.out.println("TESTE 2");
             try {
                 MockCliente.inserir(cliente);
             } catch (Exception e) {

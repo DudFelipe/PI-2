@@ -44,7 +44,7 @@ public class ClienteBLL {
             erros.add("\nO campo ENDEREÇO é um campo obrigatório!");
         }
         
-        if(c.getNumero() <= 0){
+        if(c.getNumero() == null){ //NAO DEIXAR ENTRAR CARACTERES, ARRUMAR!!!
             //return "O número digitado é inválido";
             erros.add("\nO número digitado é inválido!");
         }
@@ -80,20 +80,24 @@ public class ClienteBLL {
 
         if(!c.getEmail().contains("@")){
             //return "O email digitado não é válido!";
-            erros.add("\nO email digitado não é válido!");
+            erros.add("\nO email digitado não possui @!");
         }
+        
+        /*if(!c.getEmail().contains(".com")){
+            erros.add("\nO email digitado não possui '.com'");
+        }*/
         
         if(c.getPrefContato() == -1){
             //return "Você deve selecionar uma preferência de contato!";
             erros.add("\nVocê deve selecionar uma preferência de contato!");
         }
         
-        if(c.getTelefoneFixo().length() > 0 && c.getPrefContato() != 1){
-            erros.add("\nO campo CELULAR não foi preenchido!");
+        if(c.getTelefoneFixo().length() == 0 && c.getPrefContato() == 1){
+            erros.add("\nO campo TELEFONE FIXO não foi preenchido!");
         }
         
-        if(c.getCelular().length() > 0 && c.getPrefContato() != 2){
-            erros.add("\nO campo TELEFONE FIXO não foi preenchido!");
+        if(c.getCelular().length() == 0 && c.getPrefContato() == 2){
+            erros.add("\nO campo CELULAR não foi preenchido!");
         }
         
         if(erros.isEmpty()){
