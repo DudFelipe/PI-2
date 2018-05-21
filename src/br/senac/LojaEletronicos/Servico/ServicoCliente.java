@@ -21,7 +21,7 @@ public class ServicoCliente {
                 MockCliente.inserir(cliente);
             } catch (Exception e) {
                 e.printStackTrace();
-                resposta.add("Erro na fonta de dados!");
+                resposta.add("Erro na fonte de dados!");
             }
         }
 
@@ -38,7 +38,7 @@ public class ServicoCliente {
                 MockCliente.atualizar(cliente);
             } catch (Exception e) {
                 e.printStackTrace();
-                resposta.add("Erro na fonta de dados");
+                resposta.add("Erro na fonte de dados");
             }
         }
         return resposta;

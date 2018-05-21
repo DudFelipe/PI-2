@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author eduar
  */
-public class JAlterarExcluirCliente extends javax.swing.JFrame{
+public class JAlterarExcluirCliente extends javax.swing.JFrame {
 
     public JAlterarExcluirCliente() {
         initComponents();
@@ -579,42 +579,40 @@ public class JAlterarExcluirCliente extends javax.swing.JFrame{
 
             Cliente c = ServicoCliente.obterCliente(id); //Obtém o cliente que possui esse ID
 
-            Cliente aux = c.getClone();
-            
-            if (aux != null) {
-                aux.setNome(txtNome.getText().toUpperCase()); //Atualiza o nome do cliente com o que foi digitado no campo NOME
+            if (c != null) {
+                c.setNome(txtNome.getText().toUpperCase()); //Atualiza o nome do cliente com o que foi digitado no campo NOME
 
                 Date dataConvertida = (Date) txtFmtNascimento.getValue();
-                aux.setDataNascimento(dataConvertida); //Atualiza a data de nascimento do cliente com o que foi digitado no campo DATA DE NASCIMENTO
+                c.setDataNascimento(dataConvertida); //Atualiza a data de nascimento do cliente com o que foi digitado no campo DATA DE NASCIMENTO
 
-                aux.setSexo(comboSexo.getSelectedItem().toString().toUpperCase()); //Atualiza o sexo do cliente com o que foi selecionado no combo SEXO
-                aux.setCPF(txtCPF.getText()); //Atualiza o CPF do cliente com o que foi digitado no campo CPF
-                aux.setRG(txtRG.getText()); //Atualiza o RG do cliente com o que foi digitado no campo RG
-                aux.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase()); //Atualiza o estado civil do cliente com o que foi selecionado no combo ESTADO CIVIL
-                aux.setEndereco(txtEndereco.getText().toUpperCase()); //Atualiza o endereço do cliente com o que foi digitado no campo ENDEREÇO
-                aux.setNumero(Integer.parseInt(txtNumero.getText())); //Atualiza o número da residência com o que foi digitado no campo NUMERO
-                aux.setCEP(txtCEP.getText()); //Atualiza o CEP do cliente com o que foi digitado no campo CEP
-                aux.setBairro(txtBairro.getText().toUpperCase()); //Atualiza o bairro do cliente com o que foi digitado no campo BAIRRO
-                aux.setComplemento(txtComplemento.getText().toUpperCase()); //Atualiza o complemento do endereço com o que foi digitado no campo COMPLEMENTO
-                aux.setCidade(comboCidade.getSelectedItem().toString().toUpperCase()); //Atualiza a cidade do cliente com o que foi selecionado no combo CIDADE
-                aux.setTelefoneFixo(txtTelefone.getText()); //Atualiza o telefone fixo do cliente com o que foi digitado no campo TELEFONE FIXO
-                aux.setCelular(txtCelular.getText()); //Atualiza o celular do cliente com o que foi digitado no campo CELULAR
-                aux.setEmail(txtEmail.getText().toUpperCase()); //Atualiza o email do cliente com o que foi digitado no campo EMAIL
+                c.setSexo(comboSexo.getSelectedItem().toString().toUpperCase()); //Atualiza o sexo do cliente com o que foi selecionado no combo SEXO
+                c.setCPF(txtCPF.getText()); //Atualiza o CPF do cliente com o que foi digitado no campo CPF
+                c.setRG(txtRG.getText()); //Atualiza o RG do cliente com o que foi digitado no campo RG
+                c.setEstadoCivil(comboEstadoCivil.getSelectedItem().toString().toUpperCase()); //Atualiza o estado civil do cliente com o que foi selecionado no combo ESTADO CIVIL
+                c.setEndereco(txtEndereco.getText().toUpperCase()); //Atualiza o endereço do cliente com o que foi digitado no campo ENDEREÇO
+                c.setNumero(Integer.parseInt(txtNumero.getText())); //Atualiza o número da residência com o que foi digitado no campo NUMERO
+                c.setCEP(txtCEP.getText()); //Atualiza o CEP do cliente com o que foi digitado no campo CEP
+                c.setBairro(txtBairro.getText().toUpperCase()); //Atualiza o bairro do cliente com o que foi digitado no campo BAIRRO
+                c.setComplemento(txtComplemento.getText().toUpperCase()); //Atualiza o complemento do endereço com o que foi digitado no campo COMPLEMENTO
+                c.setCidade(comboCidade.getSelectedItem().toString().toUpperCase()); //Atualiza a cidade do cliente com o que foi selecionado no combo CIDADE
+                c.setTelefoneFixo(txtTelefone.getText()); //Atualiza o telefone fixo do cliente com o que foi digitado no campo TELEFONE FIXO
+                c.setCelular(txtCelular.getText()); //Atualiza o celular do cliente com o que foi digitado no campo CELULAR
+                c.setEmail(txtEmail.getText().toUpperCase()); //Atualiza o email do cliente com o que foi digitado no campo EMAIL
 
                 //Atualizando a preferência de contato com base no radio button selecionado
                 if (rbtTelefone.isSelected()) {
-                    aux.setPrefContato(1);
+                    c.setPrefContato(1);
                 } else {
                     if (rbtCelular.isSelected()) {
-                        aux.setPrefContato(2);
+                        c.setPrefContato(2);
                     } else {
                         if (rbtEmail.isSelected()) {
-                            aux.setPrefContato(3);
+                            c.setPrefContato(3);
                         }
                     }
                 }
 
-                List<String> msgs = ServicoCliente.atualizarCliente(aux); //Realiza a atualização dos dados de fato
+                List<String> msgs = ServicoCliente.atualizarCliente(c); //Realiza a atualização dos dados de fato
 
                 if (msgs == null) { //Caso não exista nenhuma mensagem de erro, a atualização foi realizada com sucesso
                     JOptionPane.showMessageDialog(rootPane,

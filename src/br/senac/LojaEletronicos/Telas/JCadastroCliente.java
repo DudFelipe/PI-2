@@ -378,12 +378,12 @@ public class JCadastroCliente extends javax.swing.JFrame {
                         "Cliente inserido com sucesso",
                         "Cadastro efetuado",
                         JOptionPane.INFORMATION_MESSAGE);
+            c = null;
             limparCampos(); //Limpa os campos para que seja possível realizar uma nova inserção
         }else{ //Caso contrário, mostra todas as mensagens de erro de uma só vez
             JOptionPane.showMessageDialog(null, msgs, "Erro!", 0);
         }
         
-        c = null;
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void limparCampos(){
