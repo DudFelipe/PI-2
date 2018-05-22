@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class VendasBLL {
     public static List<String> validarVenda(Venda v ){
-        List<String> erros = new ArrayList<String>();
+        List<String> erros = new ArrayList<>();
         
         if (v.getIdCliente()== 0){
             //return "O campo NOME é um campo obrigatório!";
             erros.add("É preciso ter um cliente para finalizar a venda.");
         }
-        if(v.getListaDeProdutos()==null){
+        if(v.getListaDeItens()==null){
             erros.add("É preciso ter selecionado produtos para concluir a venda.");
         }
         if(erros.isEmpty()){
