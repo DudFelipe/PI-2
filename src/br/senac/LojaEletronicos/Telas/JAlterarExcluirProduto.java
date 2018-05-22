@@ -363,10 +363,10 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             }
 
            
-            limparCamposProduto(); // Limpa o conteudo que foram digitados
-            bloquearCamposProdutos(); // Bloqueia os campos novamente
+            
        }catch(Exception e){
-           
+           limparCamposProduto(); // Limpa o conteudo que foram digitados
+           bloquearCamposProdutos(); // Bloqueia os campos novamente
        }
     }
     
