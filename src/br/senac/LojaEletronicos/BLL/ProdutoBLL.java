@@ -31,14 +31,14 @@ public class ProdutoBLL {
             erros.add("\nO campo MODELO é um campo obrigatório!");
         }
         
-        if(p.getPreco() == null && p.getPreco() <= 0){
+        if(p.getPreco() == null || p.getPreco() <= 0){
             //return "O valor digitado é inválido"";
-            erros.add("\nO valor digitado é inválido");
+            erros.add("\nO preço digitado é inválido");
         }
         
         if(p.getQuantidade() == null || p.getQuantidade()<= 0){
             //return "O campo QUANTIDADE é um campo obrigatório!";
-            erros.add("\nO valor digitado é inválido");
+            erros.add("\nA quantidade digitada é inválida");
         }
         
         if(p.getDimensoes().trim().length() == 0){

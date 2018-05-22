@@ -11,7 +11,7 @@ import java.util.List;
 public class MockProduto {
     
     //Inteiro para controlar os ID dos produtos de forma sequencial
-    private static int sequenciaIdProdutos = 0;
+    private static int sequenciaIdProdutos = 1;
     
     //Lista que irá conter os produtos cadastrados na memória
     private static List<Produto> listaProdutos = new ArrayList<Produto>();
