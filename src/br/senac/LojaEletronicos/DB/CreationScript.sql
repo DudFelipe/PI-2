@@ -19,9 +19,19 @@ CREATE TABLE Cliente (
     celular varchar(20),
     email varchar(128),
     prefContato int,
-    PRIMARY KEY (CodCliente)
+    PRIMARY KEY (idCliente)
 );
 
+CREATE TABLE Produto (
+    idProduto int not null auto_increment,
+    nome varchar(128) not null,
+    fabricante varchar(128),
+    modelo varchar(128),
+    preco float(12,2) not null,
+    quantidade int not null default 0,
+    dimensoes varchar(128),
+    PRIMARY KEY (idProduto)
+);
 
 
 /*INSERT INTO Departamento (CodDepto, DescDepto) VALUES (1, 'Financeiro');*/
