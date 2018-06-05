@@ -10,10 +10,12 @@ package br.senac.LojaEletronicos.Modelos;
  * @author Marcos
  */
 public class ItemDaVenda {
+    private Integer idItemDaVenda;
     private Produto produto;
     private Integer quantidade;
     
-    public ItemDaVenda(Produto p, int quant){
+    public ItemDaVenda(Produto p, int quant, int id){
+        idItemDaVenda = id;
         produto = p;
         quantidade = quant;
     }
@@ -48,4 +50,8 @@ public class ItemDaVenda {
         return quantidade;
     }
 
+    
+    public Integer getIdItemDaVenda(){
+        return idItemDaVenda;
+    }
 }
