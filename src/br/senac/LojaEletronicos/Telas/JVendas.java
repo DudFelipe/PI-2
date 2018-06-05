@@ -551,7 +551,7 @@ public class JVendas extends javax.swing.JFrame {
             
 //=====================================  COLOCAR QUANTIDADE AQUI QUANDO ATUALIZAR A INTERFACE!!!!!!!!!!!! ==============================
 
-            shop.getListaDeItens().add(new ItemDaVenda(p, 1));
+            shop.getListaDeItens().add(new ItemDaVenda(p, 1, 0));
 
             List<ItemDaVenda> lista = shop.getListaDeItens();
 

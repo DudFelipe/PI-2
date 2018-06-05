@@ -33,11 +33,20 @@ CREATE TABLE Produto (
     PRIMARY KEY (idProduto)
 );
 
+CREATE TABLE Venda (
+    numeroDoPedido int not null auto_increment,
+    dataVenda date,
+    idCliente int not null,
+    valorTotal float(12,2) not null default 0,00
+);
+
 CREATE TABLE ItemDaVenda (
     idItemDaVenda int not null auto_increment,
+    venda int not null,
     produto int not null,
     quantidade int not null default 1,
-    PRIMARY KEY (idItemDaVenda)
+    PRIMARY KEY (idItemDaVenda),
+    FOREIGN KEY (venda) REFERENCES Venda (numeroDoPedido),
     FOREIGN KEY (produto) REFERENCES Produto (idProduto)
 );
-/*INSERT INTO Departamento (CodDepto, DescDepto) VALUES (1, 'Financeiro');*/
+
