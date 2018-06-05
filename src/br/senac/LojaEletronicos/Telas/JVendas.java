@@ -8,14 +8,11 @@ package br.senac.LojaEletronicos.Telas;
 //import br.senac.LojaEletronicos.JIncluirProduto;
 import javax.swing.JFrame;
 import br.senac.LojaEletronicos.Modelos.Cliente;
-import br.senac.LojaEletronicos.Telas.JIncluirProdutos;
 import br.senac.LojaEletronicos.Modelos.Produto;
 import br.senac.LojaEletronicos.Modelos.Venda;
-import java.util.Calendar;
+import br.senac.LojaEletronicos.Modelos.ItemDaVenda;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -551,10 +548,12 @@ public class JVendas extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtQtd.getText().length() > 0) {
             Produto p = ip.selecionar();
+            
+//=====================================  COLOCAR QUANTIDADE AQUI QUANDO ATUALIZAR A INTERFACE!!!!!!!!!!!! ==============================
 
-            shop.getListaDeProdutos().add(p);
+            shop.getListaDeItens().add(new ItemDaVenda(p, 1));
 
-            List<Produto> lista = shop.getListaDeProdutos();
+            List<ItemDaVenda> lista = shop.getListaDeItens();
 
             DefaultTableModel model = (DefaultTableModel) TableProdutos.getModel(); //Armazena o modelo de tabela atual
             model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
@@ -590,14 +589,14 @@ public class JVendas extends javax.swing.JFrame {
 
         TableProdutos.remove(row);
 
-        List<Produto> lista = shop.getListaDeProdutos();
+        List<ItemDaVenda> lista = shop.getListaDeItens();
 
         DefaultTableModel model = (DefaultTableModel) TableProdutos.getModel(); //Armazena o modelo de tabela atual
         model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
 
         if (lista != null && lista.size() > 0) { //Verifica se há algum dado retornado da busca
             for (int i = 0; i < lista.size(); i++) { //Loop para resgatarmos todos os dados retornados
-                Produto p = lista.get(i); //Cria um cliente
+                Produto p = lista.get(i).getProduto(); //Cria um cliente?
 
                 if (p != null) {
                     Object[] row2 = new Object[6]; //Cria um vetor de 6 linhas para a tabela
