@@ -19,6 +19,7 @@ CREATE TABLE Cliente (
     celular varchar(20),
     email varchar(128),
     prefContato int,
+    enabled boolean,
     PRIMARY KEY (idCliente)
 );
 
