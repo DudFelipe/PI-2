@@ -26,6 +26,7 @@ public class ConnectionUtils {
         Properties properties = new Properties();
         properties.put("user", "root");
         properties.put("password", "");
+        properties.put("serverTimezone", "UTC");
         //Realiza a conexão com o banco
         connection = DriverManager.getConnection(dbURL, properties);
 

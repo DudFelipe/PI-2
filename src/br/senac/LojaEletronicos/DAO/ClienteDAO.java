@@ -79,9 +79,9 @@ public class ClienteDAO {
             throws SQLException, Exception {
         //Monta a string de atualização do cliente no BD, utilizando
         //prepared statement
-        String sql = "UPDATE cliente SET nome = ?, dataDeNascimento = ?, sexo = ?, CPF = ?, RG = ?, estadoCivil = ?,  endereco = ?"
-                + "numero = ?, CEP = ?, bairro = ?, complemento = ?, cidade = ?, telefoneFixo = ?, celular = ?, email = ?, prefContato = ?"
-                + "WHERE (idCliente = ?)";
+        String sql = "UPDATE cliente SET nome = ?, dataDeNascimento = ?, sexo = ?, CPF = ?, RG = ?, estadoCivil = ?,  endereco = ?,"
+                + " numero = ?, CEP = ?, bairro = ?, complemento = ?, cidade = ?, telefoneFixo = ?, celular = ?, email = ?, prefContato = ?"
+                + " WHERE (idCliente = ?)";
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -110,7 +110,7 @@ public class ClienteDAO {
             preparedStatement.setString(14, cliente.getCelular());
             preparedStatement.setString(15, cliente.getEmail());
             preparedStatement.setInt(16, cliente.getPrefContato());
-
+            preparedStatement.setInt(17, cliente.getId());
             //Executa o comando no banco de dados
             preparedStatement.execute();
         } finally {
@@ -235,17 +235,18 @@ public class ClienteDAO {
 
     //Procura um cliente no banco de dados, de acordo com o nome
     //ou com o sobrenome, passado como parâmetro
-    /*public static List<Cliente> procurar(String valor)
+    public static List<Cliente> procurar(String valor, int tipo)
             throws SQLException, Exception {
-        //Monta a string de consulta de clientes no banco, utilizando
-        //o valor passado como parâmetro para busca nas colunas de
-        //nome ou sobrenome (através do "LIKE" e ignorando minúsculas
-        //ou maiúsculas, através do "UPPER" aplicado à coluna e ao
-        //parâmetro). Além disso, também considera apenas os elementos
-        //que possuem a coluna de ativação de clientes configurada com
-        //o valor correto ("enabled" com "true")
-        String sql = "SELECT * FROM cliente WHERE ((UPPER(nome) LIKE UPPER(?) "
-                + "OR UPPER(cliente.sobrenome) LIKE UPPER(?)) AND enabled=?)";
+        String sql = null;
+        
+        if(tipo == 0){
+            sql = "SELECT * FROM cliente WHERE nome LIKE ?"
+                + " AND enabled = ?";
+        }
+        else{
+            sql = "SELECT * FROM cliente WHERE cpf LIKE ?"
+                + " AND enabled = ?";
+        }
         //Lista de clientes de resultado
         List<Cliente> listaClientes = null;
         //Conexão para abertura e fechamento
@@ -262,8 +263,7 @@ public class ClienteDAO {
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
             preparedStatement.setString(1, "%" + valor + "%");
-            preparedStatement.setString(2, "%" + valor + "%");
-            preparedStatement.setBoolean(3, true);
+            preparedStatement.setBoolean(2, true);
 
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
@@ -276,12 +276,24 @@ public class ClienteDAO {
                 }
                 //Cria uma instância de Cliente e popula com os valores do BD
                 Cliente cliente = new Cliente();
-                cliente.setId(result.getInt("cliente_id"));
+                cliente.setId(result.getInt("idCliente"));
                 cliente.setNome(result.getString("nome"));
-                cliente.setSobrenome(result.getString("sobrenome"));
-                Date d = new Date(result.getTimestamp("data_nasc").getTime());
+                Date d = new Date(result.getTimestamp("dataDeNascimento").getTime());
                 cliente.setDataNascimento(d);
-                cliente.setGenero(result.getString("sexo"));
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setCPF(result.getString("CPF"));
+                cliente.setRG(result.getString("RG"));
+                cliente.setEstadoCivil("estadoCivil");
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setNumero(result.getInt("numero"));
+                cliente.setCEP(result.getString("CEP"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setComplemento(result.getString("complemento"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setTelefoneFixo(result.getString("telefoneFixo"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setEmail(result.getString("email"));
+                cliente.setPrefContato(result.getInt("prefContato"));
                 //Adiciona a instância na lista
                 listaClientes.add(cliente);
             }
@@ -309,7 +321,7 @@ public class ClienteDAO {
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o cliente
         //com o ID informado e que esteja ativo ("enabled" com "true")
-        String sql = "SELECT * FROM cliente WHERE (cliente_id=? AND enabled=?)";
+        String sql = "SELECT * FROM cliente WHERE (idCliente = ? AND enabled = ?)";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -334,12 +346,24 @@ public class ClienteDAO {
             if (result.next()) {
                 //Cria uma instância de Cliente e popula com os valores do BD
                 Cliente cliente = new Cliente();
-                cliente.setId(result.getInt("cliente_id"));
+                cliente.setId(result.getInt("idCliente"));
                 cliente.setNome(result.getString("nome"));
-                cliente.setSobrenome(result.getString("sobrenome"));
-                Date d = new Date(result.getTimestamp("data_nasc").getTime());
+                Date d = new Date(result.getTimestamp("dataDeNascimento").getTime());
                 cliente.setDataNascimento(d);
-                cliente.setGenero(result.getString("sexo"));
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setCPF(result.getString("CPF"));
+                cliente.setRG(result.getString("RG"));
+                cliente.setEstadoCivil("estadoCivil");
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setNumero(result.getInt("numero"));
+                cliente.setCEP(result.getString("CEP"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setComplemento(result.getString("complemento"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setTelefoneFixo(result.getString("telefoneFixo"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setEmail(result.getString("email"));
+                cliente.setPrefContato(result.getInt("prefContato"));
 
                 //Retorna o resultado
                 return cliente;
@@ -363,5 +387,5 @@ public class ClienteDAO {
         //a pesquisa não teve resultados
         //Neste caso, não há um elemento a retornar, então retornamos "null"
         return null;
-    }*/
+    }
 }
