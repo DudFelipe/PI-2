@@ -1,7 +1,7 @@
 package br.senac.LojaEletronicos.Servico;
 
 import br.senac.LojaEletronicos.BLL.ProdutoBLL;
-import br.senac.LojaEletronicos.Mock.MockProduto;
+import br.senac.LojaEletronicos.DAO.ProdutoDao;
 import br.senac.LojaEletronicos.Modelos.Produto;
 import java.util.List;
 /**
@@ -18,7 +18,7 @@ public class ServicoProduto {
         if(resposta == null){
             System.out.println("TESTE 02");
             try{
-                MockProduto.inserirProduto(produto);
+                ProdutoDao.inserirProduto(produto);
             }catch(Exception e){
                 e.printStackTrace();
                 resposta.add("Ërro na fonte de dados!");
@@ -34,7 +34,7 @@ public class ServicoProduto {
         
         if(resposta == null){
             try{
-                MockProduto.atualizarProduto(produto);
+                ProdutoDao.atualizarProduto(produto);
             }catch(Exception e){
                 e.printStackTrace();
                 resposta.add("Erro na fonte de dados");
@@ -47,7 +47,7 @@ public class ServicoProduto {
         List<String> resposta = null;
 
         try {
-            MockProduto.excluirProduto(id);
+            ProdutoDao.excluirProduto(id);
         } catch (Exception e) {
             e.printStackTrace();
             resposta.add("Erro na fonte de dados");
@@ -61,9 +61,9 @@ public class ServicoProduto {
         
         try{
             if(s == null || s.equals("")) {
-                listaResposta = MockProduto.listarProdutos();
+                listaResposta = ProdutoDao.listarProdutos();
             }else{
-                listaResposta = MockProduto.procurar(s, tipo);
+                listaResposta = ProdutoDao.procurar(s, tipo);
             }
             
         }catch(Exception e){
@@ -76,7 +76,7 @@ public class ServicoProduto {
         Produto produtoResposta = null;
 
         try {
-            produtoResposta = MockProduto.obter(id);
+            produtoResposta = ProdutoDao.obter(id);
         } catch (Exception e) {
             e.printStackTrace();
         }

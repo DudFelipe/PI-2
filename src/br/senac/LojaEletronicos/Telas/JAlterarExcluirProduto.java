@@ -353,7 +353,7 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             List<String> mensagens = ServicoProduto.atualizarProduto(copiaP); // Faz a atualizacao de todos os campos
             if(mensagens == null){ 
                 JOptionPane.showMessageDialog(rootPane,
-                                               "Produto inserido com sucesso",
+                                               "Produto alterado com sucesso",
                                                "Atualização efetuada", 
                                                JOptionPane.INFORMATION_MESSAGE);
 

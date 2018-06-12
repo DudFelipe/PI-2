@@ -43,7 +43,17 @@ public class Produto implements Cloneable {
         System.out.println("Observacoes: " + getObservacoes());
         
     }
+    
+    
+      public Integer getId() {
+        return idProduto;
+    }
+      
+    public void setId(Integer idProduto){
+        this.idProduto = idProduto;
+    }
 
+   
     /**
      * @return nome do produto
      */
@@ -122,6 +132,7 @@ public class Produto implements Cloneable {
     }
 
     /**
+     * @param dimensoes
      * @param alterar dimensoes do produto
      */
     public void setDimensoes(String dimensoes) {

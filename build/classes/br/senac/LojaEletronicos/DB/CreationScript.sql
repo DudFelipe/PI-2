@@ -37,7 +37,8 @@ CREATE TABLE Venda (
     numeroDoPedido int not null auto_increment,
     dataVenda date,
     idCliente int not null,
-    valorTotal float(12,2) not null default 0,00
+    valorTotal float(12,2) not null default 0.00
+    Primary Key (numeroDoPedido)
 );
 
 CREATE TABLE ItemDaVenda (
