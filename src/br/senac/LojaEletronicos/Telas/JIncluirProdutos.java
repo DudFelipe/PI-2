@@ -19,16 +19,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JIncluirProdutos extends javax.swing.JDialog {
 
-    Produto p;
+    Produto p = new Produto();
 
     public JIncluirProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    JIncluirProdutos(JVendas aThis, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public Produto selecionar() {
         return p;
@@ -54,7 +51,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
         jLBusca.setText("Busca por");
 
-        jOpçoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Fabricante", "Preço" }));
+        jOpçoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Fabricante", "Preço" }));
         jOpçoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jOpçoesActionPerformed(evt);
@@ -68,6 +65,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         });
 
         jButBuscar.setText("Buscar");
+        jButBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButBuscarActionPerformed(evt);
+            }
+        });
 
         jButAdicionar.setText("Adicionar");
         jButAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,10 +177,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jOpçoesActionPerformed
 
     private void JTextBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextBuscaActionPerformed
-        // TODO add your handling code here:
-        pesquisar();
+      
     }//GEN-LAST:event_JTextBuscaActionPerformed
 
+    
+    
     private void jButCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCancelarActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -191,6 +194,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         p = ServicoProduto.obterProduto(id);
         
         if(row>=0){
+            
 
         }else{
             Object msgs = "Por favor, selecione um produto.";
@@ -205,6 +209,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTabelaProdutosMouseClicked
 
+    private void jButBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButBuscarActionPerformed
+        // TODO add your handling code here:
+        pesquisar();
+    }//GEN-LAST:event_jButBuscarActionPerformed
+
     private void pesquisar() {
         int tipoPesquisa = jOpçoes.getSelectedIndex(); // Verifica qual opcao de pesquisa deve ser feita
 
@@ -217,26 +226,23 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
         if (resultado != null && resultado.size() > 0) {//Verifica se há algum dado retornado da busca
             for (int i = 0; i < resultado.size(); i++) {//Loop para resgatarmos todos os dados retornados
-                Produto prod = resultado.get(i); // Cria um produto
+                Produto p = resultado.get(i); // Cria um produto
 
-                System.out.println(prod.getNome());
+                System.out.println(p.getNome());
 
-                if (prod != null) {
+                if (p != null) {
                     Object[] row = new Object[7]; //Cria um vetor de 7 linhas para a tabela
 
                     //Popula as colunas com dados do produto atual
-                    row[0] = prod.getIdProduto();
-                    row[1] = prod.getNome();
-                    row[2] = prod.getFabricante();
-                    row[3] = prod.getModelo();
-                    row[4] = prod.getPreco();
-                    row[5] = prod.getDimensoes();
-                    row[6] = prod.getQuantidade();
+                    row[0] = p.getIdProduto();
+                    row[1] = p.getNome();
+                    row[2] = p.getFabricante();
+                    row[3] = p.getModelo();
+                    row[4] = p.getPreco();
+                    row[5] = p.getDimensoes();
+                    row[6] = p.getQuantidade();
 
                     model.addRow(row); // Adiciona a linha com todos os dados na tabela da interface
-                } else {
-                    Object msgs = "Nenhum produto encontrado.";
-                    JOptionPane.showMessageDialog(null, msgs, "Erro", 0);
                 }
 
             }

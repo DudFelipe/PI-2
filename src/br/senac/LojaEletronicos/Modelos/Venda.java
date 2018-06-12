@@ -5,7 +5,10 @@
  */
 package br.senac.LojaEletronicos.Modelos;
 
+
+import static java.nio.file.Files.list;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class Venda {
     private int idCliente;//
     private Date dataVenda;//
     private String nomeCliente;//
-    private List<ItemDaVenda> ListaDeItens;//
+    private List<Produto> ListaDeProdutos;//
     
     
     public Venda(){
@@ -27,16 +30,16 @@ public class Venda {
     valorTotal =0.0f;
     numeroDoPedido =0;
     idCliente = 0;
-    ListaDeItens = new ArrayList<>();
+    ListaDeProdutos = new ArrayList<>();;
     dataVenda = null; 
 }
 
-    public List<ItemDaVenda> getListaDeItens() {
-        return ListaDeItens;
+    public List<Produto> getListaDeProdutos() {
+        return ListaDeProdutos;
     }
 
-    public void setListaDeItens(List<ItemDaVenda> Lista) {
-        this.ListaDeItens = Lista;
+    public void setListaDeProdutos(List<Produto> ListaDeProdutos) {
+        this.ListaDeProdutos = ListaDeProdutos;
     }
   
    public void mostraVenda(){
@@ -46,9 +49,10 @@ public class Venda {
        System.out.println("Valor total do pedido :"+ valorTotal);
        System.out.println("Data da compra "+ dataVenda);
        
-      for(int i=0 ; i<= ListaDeItens.size(); i++){
-          System.out.println("Produto"+ (i+1) +":"+ListaDeItens.get(i).getProduto().getNome()
-                  +"Quantidade :"+ListaDeItens.get(i).getQuantidade()); 
+      for(int i=0 ; i<= ListaDeProdutos.size(); i++){
+          System.out.println("Produto"+ (i+1) +":"+ListaDeProdutos.get(i).getNome()+
+                  "Codigo do Produto"+(i+1)+":"+ListaDeProdutos.get(i).getIdProduto()
+                  +"Quantidade :"+ListaDeProdutos.get(i).getQuantidade()); 
       }
        
        
@@ -95,5 +99,8 @@ public class Venda {
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
-     
+    
+    
+    
+    
 }
