@@ -5,30 +5,30 @@
  */
 package br.senac.LojaEletronicos.DAO;
 
-import br.senac.LojaEletronicos.Modelos.Produto;
+import br.senac.LojaEletronicos.Modelos.Cliente;
 import br.senac.LojaEletronicos.Utils.ConnectionUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  *
- * @author giovanebarreira
+ * @author Dud Felipe
  */
-public class ProdutoDao {
-    
-    //Data Access Object de Cliente. Realiza operações de BD com o cliente. 
-    
+public class ClienteDAO {
     //Insere um cliente na tabela "cliente" do banco de dados
-    public static void inserirProduto(Produto p)
+    public static void inserir(Cliente cliente)
             throws SQLException, Exception {
         //Monta a string de inserção de um cliente no BD,
         //utilizando os dados do clientes passados como parâmetro
-        String sql = "INSERT INTO produto (nome, fabricante, "
-                + "modelo, preco, quantidade, dimensoes, codBarras, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cliente (nome, dataDeNascimento, "
+                + "sexo, CPF, RG, estadoCivil, endereco, numero, CEP, bairro, complemento, cidade, "
+                + "telefoneFixo, celular, email, prefContato, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -40,14 +40,24 @@ public class ProdutoDao {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
-            preparedStatement.setString(1, p.getNome());
-            preparedStatement.setString(2, p.getFabricante());
-            preparedStatement.setString(3, p.getModelo());
-            preparedStatement.setFloat(4, p.getPreco());
-            preparedStatement.setInt(5, p.getQuantidade());
-            preparedStatement.setString(6, p.getDimensoes());
-            preparedStatement.setLong(7, p.getCodBarras());
-            preparedStatement.setBoolean(8, true);
+            preparedStatement.setString(1, cliente.getNome());
+            Timestamp t = new Timestamp(cliente.getDataNascimento().getTime());
+            preparedStatement.setTimestamp(2, t);
+            preparedStatement.setString(3, cliente.getSexo());
+            preparedStatement.setString(4, cliente.getCPF());
+            preparedStatement.setString(5, cliente.getRG());
+            preparedStatement.setString(6, cliente.getEstadoCivil());
+            preparedStatement.setString(7, cliente.getEndereco());
+            preparedStatement.setInt(8, cliente.getNumero());
+            preparedStatement.setString(9, cliente.getCEP());
+            preparedStatement.setString(10, cliente.getBairro());
+            preparedStatement.setString(11, cliente.getComplemento());
+            preparedStatement.setString(12, cliente.getCidade());
+            preparedStatement.setString(13, cliente.getTelefoneFixo());
+            preparedStatement.setString(14, cliente.getCelular());
+            preparedStatement.setString(15, cliente.getEmail());
+            preparedStatement.setInt(16, cliente.getPrefContato());
+            preparedStatement.setBoolean(17, true);
 
             //Executa o comando no banco de dados
             preparedStatement.execute();
@@ -63,16 +73,16 @@ public class ProdutoDao {
         }
     }
 
-
     //Realiza a atualização dos dados de um cliente, com ID e dados
     //fornecidos como parâmetro através de um objeto da classe "Cliente"
-    public static void atualizarProduto(Produto p) throws SQLException, Exception {
+    public static void atualizar(Cliente cliente)
+            throws SQLException, Exception {
         //Monta a string de atualização do cliente no BD, utilizando
         //prepared statement
-        String sql = "UPDATE produto SET nome=?, fabricante=?, modelo=?, preco=?, quantidade=?, dimensoes=?, codBarras=?"
-                + " WHERE idProduto = ?";
+        String sql = "UPDATE cliente SET nome = ?, dataDeNascimento = ?, sexo = ?, CPF = ?, RG = ?, estadoCivil = ?,  endereco = ?,"
+                + " numero = ?, CEP = ?, bairro = ?, complemento = ?, cidade = ?, telefoneFixo = ?, celular = ?, email = ?, prefContato = ?"
+                + " WHERE (idCliente = ?)";
         //Conexão para abertura e fechamento
-        
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
         //comandos SQL e fechamentos
@@ -83,16 +93,24 @@ public class ProdutoDao {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
-            preparedStatement.setString(1, p.getNome());
-            preparedStatement.setString(2, p.getFabricante());
-            preparedStatement.setString(3, p.getModelo());
-            preparedStatement.setFloat(4, p.getPreco());
-            preparedStatement.setInt(5, p.getQuantidade());
-            preparedStatement.setString(6, p.getDimensoes());
-            preparedStatement.setLong(7, p.getCodBarras());
-            preparedStatement.setBoolean(8, true);
-
-
+            preparedStatement.setString(1, cliente.getNome());
+            Timestamp t = new Timestamp(cliente.getDataNascimento().getTime());
+            preparedStatement.setTimestamp(2, t);
+            preparedStatement.setString(3, cliente.getSexo());
+            preparedStatement.setString(4, cliente.getCPF());
+            preparedStatement.setString(5, cliente.getRG());
+            preparedStatement.setString(6, cliente.getEstadoCivil());
+            preparedStatement.setString(7, cliente.getEndereco());
+            preparedStatement.setInt(8, cliente.getNumero());
+            preparedStatement.setString(9, cliente.getCEP());
+            preparedStatement.setString(10, cliente.getBairro());
+            preparedStatement.setString(11, cliente.getComplemento());
+            preparedStatement.setString(12, cliente.getCidade());
+            preparedStatement.setString(13, cliente.getTelefoneFixo());
+            preparedStatement.setString(14, cliente.getCelular());
+            preparedStatement.setString(15, cliente.getEmail());
+            preparedStatement.setInt(16, cliente.getPrefContato());
+            preparedStatement.setInt(17, cliente.getId());
             //Executa o comando no banco de dados
             preparedStatement.execute();
         } finally {
@@ -111,10 +129,10 @@ public class ProdutoDao {
     //como parâmetro. A exclusão lógica simplesmente "desliga" o
     //cliente, configurando um atributo específico, a ser ignorado
     //em todas as consultas de cliente ("enabled").
-    public static void excluirProduto(Integer id) throws SQLException, Exception {
+    public static void excluir(Integer id) throws SQLException, Exception {
         //Monta a string de atualização do cliente no BD, utilizando
         //prepared statement
-        String sql = "UPDATE produto SET enabled=? WHERE (idProduto=?)";
+        String sql = "UPDATE cliente SET enabled = ? WHERE (idCliente = ?)";
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -144,13 +162,13 @@ public class ProdutoDao {
     }
 
     //Lista todos os clientes da tabela clientes
-    public static List<Produto> listarProdutos()
+    public static List<Cliente> listar()
             throws SQLException, Exception {
         //Monta a string de listagem de clientes no banco, considerando
         //apenas a coluna de ativação de clientes ("enabled")
-        String sql = "SELECT * FROM produto WHERE (enabled=?)";
+        String sql = "SELECT * FROM cliente WHERE (enabled=?)";
         //Lista de clientes de resultado
-        List<Produto> listaProduto = null;
+        List<Cliente> listaClientes = null;
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -171,22 +189,31 @@ public class ProdutoDao {
             //Itera por cada item do resultado
             while (result.next()) {
                 //Se a lista não foi inicializada, a inicializa
-                if (listaProduto == null) {
-                    listaProduto = new ArrayList<Produto>();
+                if (listaClientes == null) {
+                    listaClientes = new ArrayList<Cliente>();
                 }
                 //Cria uma instância de Cliente e popula com os valores do BD
-                Produto p = new Produto();
-                p.setId(result.getInt("idProduto"));
-                p.setNome(result.getString("nome"));
-                p.setFabricante(result.getString("fabricante"));
-                p.setModelo(result.getString("modelo"));
-                p.setPreco(result.getFloat("preco"));
-                p.setQuantidade(result.getInt("quantidade"));
-                p.setDimensoes(result.getString("dimensoes"));
-                p.setCodBarras(result.getLong("codBarras"));
-                
+                Cliente cliente = new Cliente();
+                cliente.setId(result.getInt("idCliente"));
+                cliente.setNome(result.getString("nome"));
+                Date d = new Date(result.getTimestamp("dataDeNascimento").getTime());
+                cliente.setDataNascimento(d);
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setCPF(result.getString("CPF"));
+                cliente.setRG(result.getString("RG"));
+                cliente.setEstadoCivil("estadoCivil");
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setNumero(result.getInt("numero"));
+                cliente.setCEP(result.getString("CEP"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setComplemento(result.getString("complemento"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setTelefoneFixo(result.getString("telefoneFixo"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setEmail(result.getString("email"));
+                cliente.setPrefContato(result.getInt("prefContato"));
                 //Adiciona a instância na lista
-                listaProduto.add(p);
+                listaClientes.add(cliente);
             }
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
@@ -203,26 +230,25 @@ public class ProdutoDao {
             }
         }
         //Retorna a lista de clientes do banco de dados
-        return listaProduto;
+        return listaClientes;
     }
 
     //Procura um cliente no banco de dados, de acordo com o nome
     //ou com o sobrenome, passado como parâmetro
-    public static List<Produto> procurar(String valor, int tipo)
+    public static List<Cliente> procurar(String valor, int tipo)
             throws SQLException, Exception {
-        
         String sql = null;
         
         if(tipo == 0){
-            sql = "SELECT * FROM produto WHERE (nome LIKE ?) "
-                    + "AND enabled = ?";
-        }else{
-            sql = "SELECT * FROM produto WHERE (fabricante LIKE ?) "
-                    + "AND enabled = ?";
+            sql = "SELECT * FROM cliente WHERE nome LIKE ?"
+                + " AND enabled = ?";
         }
-        
+        else{
+            sql = "SELECT * FROM cliente WHERE cpf LIKE ?"
+                + " AND enabled = ?";
+        }
         //Lista de clientes de resultado
-        List<Produto> listaProduto = null;
+        List<Cliente> listaClientes = null;
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -245,22 +271,31 @@ public class ProdutoDao {
             //Itera por cada item do resultado
             while (result.next()) {
                 //Se a lista não foi inicializada, a inicializa
-                if (listaProduto == null) {
-                    listaProduto = new ArrayList<Produto>();
+                if (listaClientes == null) {
+                    listaClientes = new ArrayList<Cliente>();
                 }
                 //Cria uma instância de Cliente e popula com os valores do BD
-                Produto p = new Produto();
-                p.setId(result.getInt("idProduto"));
-                p.setNome(result.getString("nome"));
-                p.setFabricante(result.getString("fabricante"));
-                p.setModelo(result.getString("modelo"));
-                p.setPreco(result.getFloat("preco"));
-                p.setQuantidade(result.getInt("quantidade"));
-                p.setDimensoes(result.getString("dimensoes"));
-                p.setCodBarras(result.getLong("codBarras"));
-                
+                Cliente cliente = new Cliente();
+                cliente.setId(result.getInt("idCliente"));
+                cliente.setNome(result.getString("nome"));
+                Date d = new Date(result.getTimestamp("dataDeNascimento").getTime());
+                cliente.setDataNascimento(d);
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setCPF(result.getString("CPF"));
+                cliente.setRG(result.getString("RG"));
+                cliente.setEstadoCivil("estadoCivil");
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setNumero(result.getInt("numero"));
+                cliente.setCEP(result.getString("CEP"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setComplemento(result.getString("complemento"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setTelefoneFixo(result.getString("telefoneFixo"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setEmail(result.getString("email"));
+                cliente.setPrefContato(result.getInt("prefContato"));
                 //Adiciona a instância na lista
-                listaProduto.add(p);
+                listaClientes.add(cliente);
             }
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
@@ -277,16 +312,16 @@ public class ProdutoDao {
             }
         }
         //Retorna a lista de clientes do banco de dados
-        return listaProduto;
+        return listaClientes;
     }
 
     //Obtém uma instância da classe "Cliente" através de dados do
     //banco de dados, de acordo com o ID fornecido como parâmetro
-    public static Produto obter(Integer id)
+    public static Cliente obter(Integer id)
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o cliente
         //com o ID informado e que esteja ativo ("enabled" com "true")
-        String sql = "SELECT * FROM produto WHERE (idProduto=? AND enabled=?)";
+        String sql = "SELECT * FROM cliente WHERE (idCliente = ? AND enabled = ?)";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -310,18 +345,28 @@ public class ProdutoDao {
             //Verifica se há pelo menos um resultado
             if (result.next()) {
                 //Cria uma instância de Cliente e popula com os valores do BD
-                Produto p = new Produto();
-                p.setId(result.getInt("idProduto"));
-                p.setNome(result.getString("nome"));
-                p.setFabricante(result.getString("fabricante"));
-                p.setModelo(result.getString("modelo"));
-                p.setPreco(result.getFloat("preco"));
-                p.setQuantidade(result.getInt("quantidade"));
-                p.setDimensoes(result.getString("dimensoes"));
-                p.setCodBarras(result.getLong("codBarras"));
+                Cliente cliente = new Cliente();
+                cliente.setId(result.getInt("idCliente"));
+                cliente.setNome(result.getString("nome"));
+                Date d = new Date(result.getTimestamp("dataDeNascimento").getTime());
+                cliente.setDataNascimento(d);
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setCPF(result.getString("CPF"));
+                cliente.setRG(result.getString("RG"));
+                cliente.setEstadoCivil("estadoCivil");
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setNumero(result.getInt("numero"));
+                cliente.setCEP(result.getString("CEP"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setComplemento(result.getString("complemento"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setTelefoneFixo(result.getString("telefoneFixo"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setEmail(result.getString("email"));
+                cliente.setPrefContato(result.getInt("prefContato"));
 
                 //Retorna o resultado
-                return p;
+                return cliente;
             }
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
@@ -344,5 +389,3 @@ public class ProdutoDao {
         return null;
     }
 }
-
-

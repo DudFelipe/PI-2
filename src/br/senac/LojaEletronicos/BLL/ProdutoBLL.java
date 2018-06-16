@@ -33,17 +33,22 @@ public class ProdutoBLL {
         
         if(p.getPreco() == null || p.getPreco() <= 0){
             //return "O valor digitado é inválido"";
-            erros.add("\nO preço digitado é inválido");
+            erros.add("\nO PREÇO digitado é inválido");
         }
         
         if(p.getQuantidade() == null || p.getQuantidade()<= 0){
             //return "O campo QUANTIDADE é um campo obrigatório!";
-            erros.add("\nA quantidade digitada é inválida");
+            erros.add("\nA QUANTIDADE digitada é inválida");
         }
         
         if(p.getDimensoes().trim().length() == 0){
             //return "O campo DIMENSÕES é um campo obrigatório!";
             erros.add("\nO campo DIMENSÕES é um campo obrigatório!");
+        }
+        
+        if(p.getCodBarras()== null || p.getCodBarras()<= 0){
+            //return "O campo CodBarras é um campo obrigatório!";
+            erros.add("\nO CÓDIGO DE BARRAS digitado é inválido");
         }
         
         if(erros.isEmpty()){

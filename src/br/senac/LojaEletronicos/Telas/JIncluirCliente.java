@@ -20,7 +20,7 @@ public class JIncluirCliente extends javax.swing.JDialog {
     /**
      * Creates new form JIncluirCliente2
      */
-    Cliente c;
+    Cliente c = new Cliente();
     public JIncluirCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -41,18 +41,19 @@ public class JIncluirCliente extends javax.swing.JDialog {
 
         if (resultado != null && resultado.size() > 0) { //Verifica se há algum dado retornado da busca
             for (int i = 0; i < resultado.size(); i++) { //Loop para resgatarmos todos os dados retornados
-                Cliente cli = resultado.get(i); //Cria um cliente
+ 
+                Cliente c = resultado.get(i); //Cria um cliente
 
-                if (cli != null) {
+                if (c != null) {
                     Object[] row = new Object[6]; //Cria um vetor de 6 linhas para a tabela
 
                     //Popula as colunas com os dados do cliente atual
-                    row[0] = cli.getId();
-                    row[1] = cli.getNome();
-                    row[2] = cli.getCPF();
-                    row[3] = cli.getTelefoneFixo();
-                    row[4] = cli.getCelular();
-                    row[5] = cli.getEmail();
+                    row[0] = c.getId();
+                    row[1] = c.getNome();
+                    row[2] = c.getCPF();
+                    row[3] = c.getTelefoneFixo();
+                    row[4] = c.getCelular();
+                    row[5] = c.getEmail();
 
                     model.addRow(row); //Adiciona a linha com todos os dados na tabela da interface
                 }

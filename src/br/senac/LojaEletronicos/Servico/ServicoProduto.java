@@ -21,7 +21,7 @@ public class ServicoProduto {
                 ProdutoDao.inserirProduto(produto);
             }catch(Exception e){
                 e.printStackTrace();
-                resposta.add("Ërro na fonte de dados!");
+                resposta.add("Erro na fonte de dados!");
             }
         }
         return resposta;

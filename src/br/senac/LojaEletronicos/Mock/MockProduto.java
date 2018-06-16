@@ -49,6 +49,7 @@ public class MockProduto {
                    produtoLista.setPreco(produto.getPreco());
                    produtoLista.setQuantidade(produto.getQuantidade());
                    produtoLista.setDimensoes(produto.getDimensoes());
+                   produtoLista.setCodBarras(produto.getCodBarras());
                    produtoLista.setObservacoes(produto.getObservacoes());
 
                    //Indica que o produto já foi atualizado para sair do loop

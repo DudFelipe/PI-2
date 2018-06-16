@@ -1,6 +1,7 @@
 package br.senac.LojaEletronicos.Servico;
 
 import br.senac.LojaEletronicos.BLL.ClienteBLL;
+import br.senac.LojaEletronicos.DAO.ClienteDAO;
 import br.senac.LojaEletronicos.Mock.MockCliente;
 import br.senac.LojaEletronicos.Modelos.Cliente;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ServicoCliente {
 
         if (resposta == null) {
             try {
-                MockCliente.inserir(cliente);
+                ClienteDAO.inserir(cliente);
             } catch (Exception e) {
                 e.printStackTrace();
                 resposta.add("Erro na fonte de dados!");
@@ -35,7 +36,7 @@ public class ServicoCliente {
 
         if (resposta == null) {
             try {
-                MockCliente.atualizar(cliente);
+                ClienteDAO.atualizar(cliente);
             } catch (Exception e) {
                 e.printStackTrace();
                 resposta.add("Erro na fonte de dados");
@@ -48,7 +49,7 @@ public class ServicoCliente {
         List<String> resposta = null;
 
         try {
-            MockCliente.excluir(id);
+            ClienteDAO.excluir(id);
         } catch (Exception e) {
             e.printStackTrace();
             resposta.add("Erro na fonta de dados");
@@ -63,9 +64,9 @@ public class ServicoCliente {
 
         try {
             if (s == null || s.equals("")) {
-                listaResposta = MockCliente.listar();
+                listaResposta = ClienteDAO.listar();
             } else {
-                listaResposta = MockCliente.procurar(s, tipo);
+                listaResposta = ClienteDAO.procurar(s, tipo);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +78,7 @@ public class ServicoCliente {
         Cliente clienteResposta = null;
 
         try {
-            clienteResposta = MockCliente.obter(id);
+            clienteResposta = ClienteDAO.obter(id);
         } catch (Exception e) {
             e.printStackTrace();
         }

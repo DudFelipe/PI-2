@@ -19,16 +19,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JIncluirProdutos extends javax.swing.JDialog {
 
-    Produto p;
+    Produto p = new Produto();
 
     public JIncluirProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    JIncluirProdutos(JVendas aThis, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public Produto selecionar() {
         return p;
@@ -41,6 +38,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLBusca = new javax.swing.JLabel();
         jOpçoes = new javax.swing.JComboBox<>();
         JTextBusca = new javax.swing.JTextField();
@@ -50,11 +48,13 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTabelaProdutos = new javax.swing.JTable();
 
+        jPasswordField1.setText("jPasswordField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLBusca.setText("Busca por");
 
-        jOpçoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Fabricante", "Preço" }));
+        jOpçoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Fabricante", "Preço" }));
         jOpçoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jOpçoesActionPerformed(evt);
@@ -68,6 +68,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         });
 
         jButBuscar.setText("Buscar");
+        jButBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButBuscarActionPerformed(evt);
+            }
+        });
 
         jButAdicionar.setText("Adicionar");
         jButAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,20 +90,20 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
         jTabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Fabricante", "Preço", "Modelo", "Dimensões", "Qtde"
+                "Código", "Cód.Barras", "Nome", "Fabricante", "Preço", "Modelo", "Dimensões", "Qtde"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -115,41 +120,49 @@ public class JIncluirProdutos extends javax.swing.JDialog {
             }
         });
         jScrollPane2.setViewportView(jTabelaProdutos);
+        if (jTabelaProdutos.getColumnModel().getColumnCount() > 0) {
+            jTabelaProdutos.getColumnModel().getColumn(0).setMinWidth(0);
+            jTabelaProdutos.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTabelaProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(32, 32, 32)))
-                .addContainerGap())
+                .addGap(51, 51, 51)
+                .addComponent(jButAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addGap(38, 38, 38))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(141, 141, 141)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(153, 153, 153)
+                    .addComponent(jLBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jOpçoes, 0, 99, Short.MAX_VALUE))
-                    .addContainerGap(133, Short.MAX_VALUE)))
+                    .addComponent(jOpçoes, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(188, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButBuscar)
+                    .addComponent(JTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButAdicionar)
                     .addComponent(jButCancelar))
@@ -160,11 +173,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jOpçoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLBusca))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(JTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButBuscar))
-                    .addContainerGap(240, Short.MAX_VALUE)))
+                    .addContainerGap(310, Short.MAX_VALUE)))
         );
 
         pack();
@@ -175,10 +184,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jOpçoesActionPerformed
 
     private void JTextBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextBuscaActionPerformed
-        // TODO add your handling code here:
-        pesquisar();
+      
     }//GEN-LAST:event_JTextBuscaActionPerformed
 
+    
+    
     private void jButCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCancelarActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -191,6 +201,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         p = ServicoProduto.obterProduto(id);
         
         if(row>=0){
+            
 
         }else{
             Object msgs = "Por favor, selecione um produto.";
@@ -205,6 +216,11 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTabelaProdutosMouseClicked
 
+    private void jButBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButBuscarActionPerformed
+        // TODO add your handling code here:
+        pesquisar();
+    }//GEN-LAST:event_jButBuscarActionPerformed
+
     private void pesquisar() {
         int tipoPesquisa = jOpçoes.getSelectedIndex(); // Verifica qual opcao de pesquisa deve ser feita
 
@@ -217,26 +233,24 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
         if (resultado != null && resultado.size() > 0) {//Verifica se há algum dado retornado da busca
             for (int i = 0; i < resultado.size(); i++) {//Loop para resgatarmos todos os dados retornados
-                Produto prod = resultado.get(i); // Cria um produto
+                Produto p = resultado.get(i); // Cria um produto
 
-                System.out.println(prod.getNome());
+                System.out.println(p.getNome());
 
-                if (prod != null) {
-                    Object[] row = new Object[7]; //Cria um vetor de 7 linhas para a tabela
+                if (p != null) {
+                    Object[] row = new Object[8]; //Cria um vetor de 7 linhas para a tabela
 
                     //Popula as colunas com dados do produto atual
-                    row[0] = prod.getIdProduto();
-                    row[1] = prod.getNome();
-                    row[2] = prod.getFabricante();
-                    row[3] = prod.getModelo();
-                    row[4] = prod.getPreco();
-                    row[5] = prod.getDimensoes();
-                    row[6] = prod.getQuantidade();
+                    row[0] = p.getId();
+                    row[1] = p.getCodBarras();
+                    row[2] = p.getNome();
+                    row[3] = p.getFabricante();
+                    row[4] = p.getModelo();
+                    row[5] = p.getPreco();
+                    row[6] = p.getDimensoes();
+                    row[7] = p.getQuantidade();
 
                     model.addRow(row); // Adiciona a linha com todos os dados na tabela da interface
-                } else {
-                    Object msgs = "Nenhum produto encontrado.";
-                    JOptionPane.showMessageDialog(null, msgs, "Erro", 0);
                 }
 
             }
@@ -290,6 +304,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jButCancelar;
     private javax.swing.JLabel jLBusca;
     private javax.swing.JComboBox<String> jOpçoes;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabelaProdutos;
     // End of variables declaration//GEN-END:variables
