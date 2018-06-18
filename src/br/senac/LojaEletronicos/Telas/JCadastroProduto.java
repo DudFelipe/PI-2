@@ -44,13 +44,10 @@ public class JCadastroProduto extends javax.swing.JFrame {
         lblObservacoes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacoes = new javax.swing.JTextArea();
-        lblCodBarras = new javax.swing.JLabel();
-        txtCodBarras = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar produtos");
-        setResizable(false);
 
         InfosDoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Produto"));
 
@@ -79,14 +76,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
         txtObservacoes.setRows(5);
         jScrollPane1.setViewportView(txtObservacoes);
 
-        lblCodBarras.setText("Cód Barras");
-
-        txtCodBarras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodBarrasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout InfosDoProdutoLayout = new javax.swing.GroupLayout(InfosDoProduto);
         InfosDoProduto.setLayout(InfosDoProdutoLayout);
         InfosDoProdutoLayout.setHorizontalGroup(
@@ -94,13 +83,13 @@ public class JCadastroProduto extends javax.swing.JFrame {
             .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                         .addComponent(lblObservacoes)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
                     .addGroup(InfosDoProdutoLayout.createSequentialGroup()
-                        .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InfosDoProdutoLayout.createSequentialGroup()
+                        .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                                 .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFabricante)
                                     .addComponent(lblNomeProd))
@@ -108,20 +97,16 @@ public class JCadastroProduto extends javax.swing.JFrame {
                                 .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InfosDoProdutoLayout.createSequentialGroup()
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblModelo)
-                                    .addComponent(lblCodBarras))
-                                .addGap(3, 3, 3)
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCodBarras)
-                                    .addComponent(txtModelo))))
+                            .addGroup(InfosDoProdutoLayout.createSequentialGroup()
+                                .addComponent(lblModelo)
+                                .addGap(24, 24, 24)
+                                .addComponent(txtModelo)))
                         .addGap(20, 20, 20)
                         .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDimensoes)
                             .addComponent(lblQuantidade)
                             .addComponent(lblPreco))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDimensoes, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                             .addComponent(txtPreco)
@@ -152,12 +137,8 @@ public class JCadastroProduto extends javax.swing.JFrame {
                     .addComponent(lblModelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodBarras)
-                    .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(lblObservacoes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -196,7 +177,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
        p = new Produto(); // cria um novo produto
        
@@ -216,11 +196,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
            
        }
        
-        try{
-           p.setCodBarras(Long.parseLong(txtCodBarras.getText()));
-       }catch(Exception e){
-           
-       }
        
        
        p.setDimensoes(txtDimensoes.getText().toUpperCase());
@@ -252,17 +227,12 @@ public class JCadastroProduto extends javax.swing.JFrame {
         txtQuantidade.setText("");
         txtDimensoes.setText("");
         txtObservacoes.setText("");
-        txtCodBarras.setText("");
     }
     
     private void txtDimensoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDimensoesActionPerformed
 
     
     }//GEN-LAST:event_txtDimensoesActionPerformed
-
-    private void txtCodBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodBarrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodBarrasActionPerformed
 
   
     public static void main(String args[]) {
@@ -301,7 +271,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel InfosDoProduto;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCodBarras;
     private javax.swing.JLabel lblDimensoes;
     private javax.swing.JLabel lblFabricante;
     private javax.swing.JLabel lblModelo;
@@ -309,7 +278,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblObservacoes;
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQuantidade;
-    private javax.swing.JTextField txtCodBarras;
     private javax.swing.JTextField txtDimensoes;
     private javax.swing.JTextField txtFabricante;
     private javax.swing.JTextField txtModelo;

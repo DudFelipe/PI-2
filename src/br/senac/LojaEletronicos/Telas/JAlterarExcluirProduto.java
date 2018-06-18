@@ -46,31 +46,28 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
         lblObservacoes = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObservacoes = new javax.swing.JTextArea();
-        txtCodBarras = new javax.swing.JTextField();
-        lblCodBarras = new javax.swing.JLabel();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pesquisar produtos");
-        setResizable(false);
 
         jTabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "CódBarras", "Nome", "Fabricante", "Modelo", "Preço", "Dimensões", "Qtde"
+                "Código", "Nome", "Fabricante", "Modelo", "Preço", "Dimensões", "Qtde"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -87,15 +84,10 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTabelaResultados);
-        if (jTabelaResultados.getColumnModel().getColumnCount() > 0) {
-            jTabelaResultados.getColumnModel().getColumn(0).setMinWidth(0);
-            jTabelaResultados.getColumnModel().getColumn(0).setPreferredWidth(0);
-            jTabelaResultados.getColumnModel().getColumn(0).setMaxWidth(0);
-        }
 
         lblBusca.setText("Busca por");
 
-        comboCatBusca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Fabricante" }));
+        comboCatBusca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Fabricante", "Preço" }));
         comboCatBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboCatBuscaActionPerformed(evt);
@@ -171,8 +163,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
         txtObservacoes.setRows(5);
         jScrollPane2.setViewportView(txtObservacoes);
 
-        lblCodBarras.setText("CódBarras");
-
         javax.swing.GroupLayout InfosDoProdutoLayout = new javax.swing.GroupLayout(InfosDoProduto);
         InfosDoProduto.setLayout(InfosDoProdutoLayout);
         InfosDoProdutoLayout.setHorizontalGroup(
@@ -180,28 +170,25 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                     .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                         .addComponent(lblObservacoes)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
                     .addGroup(InfosDoProdutoLayout.createSequentialGroup()
-                        .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InfosDoProdutoLayout.createSequentialGroup()
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(InfosDoProdutoLayout.createSequentialGroup()
+                                    .addComponent(lblNomeProd)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(txtNomeProd))
+                                .addGroup(InfosDoProdutoLayout.createSequentialGroup()
                                     .addComponent(lblFabricante)
-                                    .addComponent(lblNomeProd))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNomeProd, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                    .addComponent(txtFabricante)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InfosDoProdutoLayout.createSequentialGroup()
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblModelo)
-                                    .addComponent(lblCodBarras))
-                                .addGap(7, 7, 7)
-                                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCodBarras, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                                    .addComponent(txtModelo))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(InfosDoProdutoLayout.createSequentialGroup()
+                                .addComponent(lblModelo)
+                                .addGap(24, 24, 24)
+                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantidade)
@@ -238,14 +225,10 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                     .addComponent(lblModelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodBarras)
-                    .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(lblObservacoes)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,12 +270,12 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(InfosDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -340,9 +323,8 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
             txtFabricante.setText(p.getFabricante()); // Preenche campo fabricante
             txtModelo.setText(p.getModelo());
             txtPreco.setText(Float.toString(p.getPreco()));
-            txtQuantidade.setText(Integer.toString(p.getQuantidade()));
+            txtQuantidade.setText(p.getQuantidade().toString());
             txtDimensoes.setText(p.getDimensoes());
-            txtCodBarras.setText(Long.toString(p.getCodBarras()));
             txtObservacoes.setText(p.getObservacoes());           
         }
     }
@@ -365,14 +347,13 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                 copiaP.setQuantidade(Integer.parseInt(txtQuantidade.getText())); // atualiza a quantidade
                 copiaP.setDimensoes(txtDimensoes.getText()); // atualiza as dimensões
                 copiaP.setObservacoes(txtObservacoes.getText().toUpperCase()); // atualiza o campo observações
-                copiaP.setCodBarras(Long.parseLong(txtCodBarras.getText())); // atualiza cod barras
 
             }
             
             List<String> mensagens = ServicoProduto.atualizarProduto(copiaP); // Faz a atualizacao de todos os campos
             if(mensagens == null){ 
                 JOptionPane.showMessageDialog(rootPane,
-                                               "Produto alterado com sucesso",
+                                               "Produto inserido com sucesso",
                                                "Atualização efetuada", 
                                                JOptionPane.INFORMATION_MESSAGE);
 
@@ -432,18 +413,17 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                 System.out.println(prod.getNome());
                 
                 if(prod != null){
-                    Object[] row = new Object[8]; //Cria um vetor de 7 linhas para a tabela
+                    Object[] row = new Object[7]; //Cria um vetor de 7 linhas para a tabela
                     
                     //Popula as colunas com dados do produto atual
                     
                     row[0] = prod.getIdProduto();
-                    row[1] = prod.getCodBarras();
-                    row[2] = prod.getNome();
-                    row[3] = prod.getFabricante();
-                    row[4] = prod.getModelo();
-                    row[5] = prod.getPreco();
-                    row[6] = prod.getDimensoes();
-                    row[7] = prod.getQuantidade();
+                    row[1] = prod.getNome();
+                    row[2] = prod.getFabricante();
+                    row[3] = prod.getModelo();
+                    row[4] = prod.getPreco();
+                    row[5] = prod.getDimensoes();
+                    row[6] = prod.getQuantidade();
                     
                     model.addRow(row); // Adiciona a linha com todos os dados na tabela da interface
                 }
@@ -461,7 +441,7 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
         txtQuantidade.setText("");
         txtDimensoes.setText("");
         txtObservacoes.setText("");
-        txtCodBarras.setText("");
+        
         txtNomeProd.setFocusable(true);
     }
       
@@ -472,7 +452,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
         txtPreco.setEnabled(true);
         txtQuantidade.setEnabled(true);
         txtDimensoes.setEnabled(true);
-        txtCodBarras.setEnabled(true);
         txtObservacoes.setEnabled(true);
       }
       
@@ -483,7 +462,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
         txtPreco.setEnabled(false);
         txtQuantidade.setEnabled(false);
         txtDimensoes.setEnabled(false);
-        txtCodBarras.setEnabled(false);
         txtObservacoes.setEnabled(false);
       }
     
@@ -536,7 +514,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabelaResultados;
     private javax.swing.JLabel lblBusca;
-    private javax.swing.JLabel lblCodBarras;
     private javax.swing.JLabel lblDimensoes;
     private javax.swing.JLabel lblFabricante;
     private javax.swing.JLabel lblModelo;
@@ -545,7 +522,6 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JTextField txtBusca;
-    private javax.swing.JTextField txtCodBarras;
     private javax.swing.JTextField txtDimensoes;
     private javax.swing.JTextField txtFabricante;
     private javax.swing.JTextField txtModelo;

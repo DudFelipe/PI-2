@@ -12,7 +12,6 @@ package br.senac.LojaEletronicos.Modelos;
 public class Produto implements Cloneable {
     private String nome, fabricante, modelo, dimensoes, observacoes;
     private Integer idProduto, quantidade;
-    private Long codBarras;
     private Float preco;
             
     public Produto(){
@@ -23,7 +22,6 @@ public class Produto implements Cloneable {
         preco = 0.0f;
         quantidade = 0;
         dimensoes = "";
-        codBarras = 0l;
         observacoes = "";        
     }
     
@@ -42,21 +40,10 @@ public class Produto implements Cloneable {
         System.out.println("Preco: " + getPreco());
         System.out.println("Quantidade: " + getQuantidade());
         System.out.println("Dimensoes: " + getDimensoes());
-        System.out.println("Cód.Barras: " + getCodBarras());
         System.out.println("Observacoes: " + getObservacoes());
         
     }
-    
-    
-      public Integer getId() {
-        return idProduto;
-    }
-      
-    public void setId(Integer idProduto){
-        this.idProduto = idProduto;
-    }
 
-   
     /**
      * @return nome do produto
      */
@@ -135,21 +122,11 @@ public class Produto implements Cloneable {
     }
 
     /**
-     * @param dimensoes
      * @param alterar dimensoes do produto
      */
     public void setDimensoes(String dimensoes) {
         this.dimensoes = dimensoes;
     }
-    
-     public Long getCodBarras() {
-        return codBarras;
-    }
-     
-     public void setCodBarras(Long codBarras) {
-        this.codBarras = codBarras;
-    }
-    
 
     /**
      * @return observacoes do produto

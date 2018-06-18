@@ -12,11 +12,10 @@ import java.util.Properties;
 
 /**
  *
- * @author giovanebarreira
+ * @author Dud Felipe
  */
 public class ConnectionUtils {
-    
-       //Obtém uma conexão do banco de dados
+    //Obtém uma conexão do banco de dados
     public static Connection getConnection() throws SQLException {
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -27,13 +26,11 @@ public class ConnectionUtils {
         Properties properties = new Properties();
         properties.put("user", "root");
         properties.put("password", "");
+        properties.put("serverTimezone", "UTC");
         //Realiza a conexão com o banco
         connection = DriverManager.getConnection(dbURL, properties);
 
         //Retorna a conexão
         return connection;
     }
-    
-    
-    
 }

@@ -81,7 +81,6 @@ public class JIncluirCliente extends javax.swing.JDialog {
         jBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -230,9 +229,6 @@ public class JIncluirCliente extends javax.swing.JDialog {
 
     private void buttonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelecionarActionPerformed
         // TODO add your handling code here
-        
-        try{
-            
         int row = tableClientes.getSelectedRow();
         Integer id = (Integer) tableClientes.getValueAt(row, 0);
         c = ServicoCliente.obterCliente(id);
@@ -244,10 +240,7 @@ public class JIncluirCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, msgs, "Cadastro não selecionado.", 0);
         }
         dispose();
-        }catch(Exception e){
-            
-          JOptionPane.showMessageDialog(null, "Nenhum cadastro encontrado", "Cadastro não selecionado.", 0)  ;
-        }
+
     }//GEN-LAST:event_buttonSelecionarActionPerformed
 
     private void comboOpcaoDeBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOpcaoDeBuscaActionPerformed

@@ -133,27 +133,26 @@ public class JVendas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vender produtos");
-        setResizable(false);
 
         telaVendas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         TableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Código", "Cód. Barras", "Produto", "Valor R$", "Quantidade"
+                "Código", "Produto", "Valor R$", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -161,11 +160,6 @@ public class JVendas extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TableProdutos);
-        if (TableProdutos.getColumnModel().getColumnCount() > 0) {
-            TableProdutos.getColumnModel().getColumn(0).setMinWidth(0);
-            TableProdutos.getColumnModel().getColumn(0).setPreferredWidth(0);
-            TableProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
-        }
 
         btnRemoverItem.setForeground(new java.awt.Color(255, 0, 0));
         btnRemoverItem.setText("Remover Item");
@@ -368,6 +362,7 @@ public class JVendas extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaVendasLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jScrollPane1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(telaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(telaVendasLayout.createSequentialGroup()
                                         .addGap(29, 29, 29)
@@ -601,8 +596,6 @@ public class JVendas extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtQtd.getText().length() > 0) {
             
-            
-            
             List<String> erros = new ArrayList<String>();
             erros = VendasBLL.verificarLista(listaDeProdutos, p);
             
@@ -613,16 +606,13 @@ public class JVendas extends javax.swing.JFrame {
                  List<String> msg = new ArrayList<String>();
 
                 //Inclui produto na lista e verifica se quantidade está disponivel
-                p.setQuantidade(Integer.parseInt(txtQtd.getText()));
-                
                 listaDeProdutos.add(p);
-                
                 msg = VendasBLL.verificaQuantidade(listaDeProdutos, p);
 
                 if (msg == null|| erros.size()<=0) {
                     subtotal = Float.parseFloat(txtQtd.getText()) * p.getPreco();
                     valorTotal += subtotal;
-                    
+
                     DefaultTableModel model = (DefaultTableModel) TableProdutos.getModel(); //Armazena o modelo de tabela atual
                     model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
                     
@@ -630,14 +620,13 @@ public class JVendas extends javax.swing.JFrame {
                         for (int i = 0; i < listaDeProdutos.size(); i++) { //Loop para resgatarmos todos os dados retornados
 
                             if (p != null) {
-                                Object[] row = new Object[5]; //Cria um vetor de 6 linhas para a tabela
+                                Object[] row = new Object[6]; //Cria um vetor de 6 linhas para a tabela
 
                                 //Popula as colunas com os dados do cliente atual
                                 row[0] = p.getIdProduto();
-                                row[1] = p.getCodBarras();
-                                row[2] = p.getNome();
-                                row[3] = p.getPreco();
-                                row[4] = p.getQuantidade();
+                                row[1] = p.getNome();
+                                row[2] = p.getPreco();
+                                row[3] = p.getQuantidade();
 
                                 model.addRow(row); //Adiciona a linha com todos os dados na tabela da interface 
                                 lblValorTotal.setText(String.valueOf(valorTotal));
@@ -662,7 +651,6 @@ public class JVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAdicionarItemActionPerformed
 
     private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
-        try{
         int row = TableProdutos.getSelectedRow(); //Armazena a linha que foi selecionada
 
         subtotal = listaDeProdutos.get(row).getPreco() * listaDeProdutos.get(row).getQuantidade();
@@ -689,10 +677,6 @@ public class JVendas extends javax.swing.JFrame {
                 }
             }
         }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado","Erro",0);
-        }
-        
     }//GEN-LAST:event_btnRemoverItemActionPerformed
 
     private void txtQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdActionPerformed

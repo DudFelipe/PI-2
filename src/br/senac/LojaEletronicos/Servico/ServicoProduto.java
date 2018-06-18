@@ -1,7 +1,7 @@
 package br.senac.LojaEletronicos.Servico;
 
 import br.senac.LojaEletronicos.BLL.ProdutoBLL;
-import br.senac.LojaEletronicos.DAO.ProdutoDao;
+import br.senac.LojaEletronicos.Mock.MockProduto;
 import br.senac.LojaEletronicos.Modelos.Produto;
 import java.util.List;
 /**
@@ -18,10 +18,10 @@ public class ServicoProduto {
         if(resposta == null){
             System.out.println("TESTE 02");
             try{
-                ProdutoDao.inserirProduto(produto);
+                MockProduto.inserirProduto(produto);
             }catch(Exception e){
                 e.printStackTrace();
-                resposta.add("Erro na fonte de dados!");
+                resposta.add("Ërro na fonte de dados!");
             }
         }
         return resposta;
@@ -34,7 +34,7 @@ public class ServicoProduto {
         
         if(resposta == null){
             try{
-                ProdutoDao.atualizarProduto(produto);
+                MockProduto.atualizarProduto(produto);
             }catch(Exception e){
                 e.printStackTrace();
                 resposta.add("Erro na fonte de dados");
@@ -47,7 +47,7 @@ public class ServicoProduto {
         List<String> resposta = null;
 
         try {
-            ProdutoDao.excluirProduto(id);
+            MockProduto.excluirProduto(id);
         } catch (Exception e) {
             e.printStackTrace();
             resposta.add("Erro na fonte de dados");
@@ -61,9 +61,9 @@ public class ServicoProduto {
         
         try{
             if(s == null || s.equals("")) {
-                listaResposta = ProdutoDao.listarProdutos();
+                listaResposta = MockProduto.listarProdutos();
             }else{
-                listaResposta = ProdutoDao.procurar(s, tipo);
+                listaResposta = MockProduto.procurar(s, tipo);
             }
             
         }catch(Exception e){
@@ -76,7 +76,7 @@ public class ServicoProduto {
         Produto produtoResposta = null;
 
         try {
-            produtoResposta = ProdutoDao.obter(id);
+            produtoResposta = MockProduto.obter(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
