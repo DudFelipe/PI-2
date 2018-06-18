@@ -22,11 +22,11 @@ public class ConnectionUtils {
         Connection connection = null;
         //Só tenta abrir uma conexão se não existir ou estiver fechada            
         //Endereço de conexão com o banco de dados
-        String dbURL = "jdbc:mysql://localhost:8889/Loja";
+        String dbURL = "jdbc:mysql://localhost:3306/Loja";
         //Propriedades para armazenamento de usuário e senha
         Properties properties = new Properties();
         properties.put("user", "root");
-        properties.put("password", "root");
+        properties.put("password", "");
         //Realiza a conexão com o banco
         connection = DriverManager.getConnection(dbURL, properties);
 
