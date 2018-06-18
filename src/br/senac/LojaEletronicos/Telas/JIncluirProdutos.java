@@ -51,6 +51,7 @@ public class JIncluirProdutos extends javax.swing.JDialog {
         jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLBusca.setText("Busca por");
 

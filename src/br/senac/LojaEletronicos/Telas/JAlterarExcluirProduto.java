@@ -53,6 +53,7 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pesquisar produtos");
+        setResizable(false);
 
         jTabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,7 +200,7 @@ public class JAlterarExcluirProduto extends javax.swing.JFrame {
                                     .addComponent(lblCodBarras))
                                 .addGap(7, 7, 7)
                                 .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCodBarras)
+                                    .addComponent(txtCodBarras, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                                     .addComponent(txtModelo))))
                         .addGap(18, 18, 18)
                         .addGroup(InfosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

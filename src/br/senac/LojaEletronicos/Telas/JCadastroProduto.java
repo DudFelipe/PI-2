@@ -50,6 +50,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar produtos");
+        setResizable(false);
 
         InfosDoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Produto"));
 
