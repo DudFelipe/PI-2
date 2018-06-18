@@ -197,19 +197,22 @@ public class JIncluirProdutos extends javax.swing.JDialog {
 
     private void jButAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButAdicionarActionPerformed
         // TODO add your handling code here:
+        
+       try{
         int row = jTabelaProdutos.getSelectedRow();
         Integer id = (Integer) jTabelaProdutos.getValueAt(row, 0);
-        p = ServicoProduto.obterProduto(id);
         
-        if(row>=0){
+        if(row<=0|| JTextBusca.getText().length() > 0){
             
-
+            p = ServicoProduto.obterProduto(id);
+            
         }else{
-            Object msgs = "Por favor, selecione um produto.";
-            JOptionPane.showMessageDialog(null, msgs, "Produto não selecionado.", 0);
+            JOptionPane.showMessageDialog(null, "Selecione um produto", "Erro", 0);
         }
         dispose();
-        
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Nenhum produto encontrado", "Erro", 0);
+       }
         
     }//GEN-LAST:event_jButAdicionarActionPerformed
 

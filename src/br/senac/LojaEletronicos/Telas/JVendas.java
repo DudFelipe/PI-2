@@ -601,6 +601,8 @@ public class JVendas extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtQtd.getText().length() > 0) {
             
+            
+            
             List<String> erros = new ArrayList<String>();
             erros = VendasBLL.verificarLista(listaDeProdutos, p);
             
@@ -611,13 +613,16 @@ public class JVendas extends javax.swing.JFrame {
                  List<String> msg = new ArrayList<String>();
 
                 //Inclui produto na lista e verifica se quantidade está disponivel
+                p.setQuantidade(Integer.parseInt(txtQtd.getText()));
+                
                 listaDeProdutos.add(p);
+                
                 msg = VendasBLL.verificaQuantidade(listaDeProdutos, p);
 
                 if (msg == null|| erros.size()<=0) {
                     subtotal = Float.parseFloat(txtQtd.getText()) * p.getPreco();
                     valorTotal += subtotal;
-
+                    
                     DefaultTableModel model = (DefaultTableModel) TableProdutos.getModel(); //Armazena o modelo de tabela atual
                     model.setRowCount(0); //Garantindo que não haverá nenhum dado na tabela antes da preparação dos dados
                     
@@ -657,6 +662,7 @@ public class JVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAdicionarItemActionPerformed
 
     private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
+        try{
         int row = TableProdutos.getSelectedRow(); //Armazena a linha que foi selecionada
 
         subtotal = listaDeProdutos.get(row).getPreco() * listaDeProdutos.get(row).getQuantidade();
@@ -683,6 +689,10 @@ public class JVendas extends javax.swing.JFrame {
                 }
             }
         }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado","Erro",0);
+        }
+        
     }//GEN-LAST:event_btnRemoverItemActionPerformed
 
     private void txtQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdActionPerformed
