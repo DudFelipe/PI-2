@@ -30,9 +30,7 @@ CREATE TABLE Produto (
     modelo varchar(128),
     preco float(12,2) not null,
     quantidade int not null default 0,
-    codBarras long not null,
     dimensoes varchar(128),
-    enabled boolean,
     PRIMARY KEY (idProduto)
 );
 
@@ -40,8 +38,7 @@ CREATE TABLE Venda (
     numeroDoPedido int not null auto_increment,
     dataVenda date,
     idCliente int not null,
-    valorTotal float(12,2) not null default 0.00,
-    Primary Key (numeroDoPedido)
+    valorTotal float(12,2) not null default 0,00
 );
 
 CREATE TABLE ItemDaVenda (
